@@ -1,0 +1,16 @@
+
+== Objectifs
+
+[.step]
+=== JAVA 22
+    * JEP 447 _ Statements before super
+    * JEP 456 _ Unnamed Variables & Patterns
+    * JEP 459 _ String Templates
+    * JEP 457 _ Class-File API
+
+[.step]
+=== JAVA 23
+    * JEP 455 _ Primitive Types in Patterns, instanceof, and switch
+    * JEP 467 _ Markdown Documentation Comments
+    * JEP 456 – Unnamed Variables & Patterns
+    * JEP 473 _ Stream Gatherers

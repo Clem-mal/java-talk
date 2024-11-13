@@ -1,0 +1,41 @@
+
+== JEP 457 – Class-File API (Preview)
+
+[%notitle]
+=== Contenu des parties
+
+=== Objectifs :
+
+--
+
+[.step]
+* *API standard* pour manipuler les fichiers de classe Java
+* directement dans le *JDK*
+* permettant de *parser*, *générer*, et *transformer* les fichiers
+--
+
+[.notes]
+--
+* Actuellement, il existe de nombreuses librairies dans l'écosystème Java, comme ASM, BCEL, et Javassist, qui permettent
+ce genre de manipulation, mais cette JEP vise à fournir une solution native et unifiée au sein du JDK lui-même.
+--
+
+
+=== Avant la Class-File Api de Java 22
+--
+[.step]
+* librairie existantes : *ASM*, *BCEL*, et *Javassist*
+* contraintes : attendre une mise à jour de ces librairie à chaque nouvelle version de java
+--
+
+=== Avantage
+
+--
+[.step]
+* Fournir une API stable
+* Assurer la *compatibilité* entre l’API et les nouvelles versions de Java, en éliminant la dépendance à des bibliothèques tierces (comme ASM)
+* *Évolution avec le JDK* : Comme le format de fichier de classe évolue à chaque nouvelle version de Java, l’API Class-File évoluera également..
+* Rendre la *manipulation des fichiers de classe plus sûre* en *intégrant* cette fonctionnalité au *JDK lui-même*.
+--
+
+

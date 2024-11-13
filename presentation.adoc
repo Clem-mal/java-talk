@@ -1,0 +1,64 @@
+[%notitle]
+== Intro
+
+image::images/Java-Emblem.jpg[background, width=200]
+
+[.notes]
+--
+* je ne sais pas si *vous avez pu le constater*, mais ayant pu travailler sur *plusieurs projets*
+* je me suis rendu compte que *la documentation n'est jamais écrite de la même manière*
+* pas la même structure, pas les mêmes titres, pas les mêmes informations ...
+* vous avez peut être même déjà *assisté à des réunions pour restructurer* cette documentation car les gens s'y *perdent et ne retrouvent pas les infos*
+* partant de ce constat, je me suis demandé s'il n'existait pas un template de référence
+* une structure prêt à remplir, adaptable à tout projet
+--
+
+[%notitle]
+=== Contenu des parties
+
+[.step]
+* Contenu - _que faut-il documenter ?_
+* Motivation - _pourquoi documenter ?_
+* Représentation - _comment documenter ?_
+
+[.notes]
+--
+* *durant ce talk*, je vous propose d'*appliquer de manière simple* ce template à un *projet fictif*
+* et pour nous aider, nous utiliserons des *outils open source de génération* de documentation
+--
+
+[%notitle.columns.is-vcentered.transparency]
+=== Présentation
+
+[.blur]
+image::images/ocean.jpg[background, size=fill]
+
+[.column.is-two-fifth]
+--
+image::images/photo.png[]
+--
+
+[.column.has-text-left]
+****
+
+[.important-text]
+--
+Clément MALLAMBIC
+
+Développeur Back-End
+
+--
+
+image:images/onepoint.png[width=200]
+
+[.vertical-align-middle]
+icon:github[] https://github.com/Clem-mal[Github]
+****
+
+[.notes]
+--
+* vous retrouverez sur github :
+** les *slides*
+** tous les *outils évoqués* durant le talk
+** et pour ceux que je vais vous montrer, un *README expliquant comment les utiliser*
+--

@@ -1,0 +1,31 @@
+
+== JEP 467 – Markdown Documentation Comments
+
+[%notitle]
+=== Contenu des parties
+
+Fonctionnalité qui permet d’écrire les commentaires de la documentation *JavaDoc* et *Marckdown* .
+
+
+[.notes]
+--
+Écrire du code HTML n’est pas toujours facile et très lisible sans un rendu, de plus, les tags JavaDoc sont parfois compliqués à utiliser.
+Markdown est un langage qui est à la fois lisible sans rendu, et simple d’utilisation.
+L’utiliser pour des commentaires JavaDoc est une super alternative.
+Markdown supporte l’utilisation de tag HTML offrant une grande flexibilité, les tags spécifiques JavaDoc sont toujours supportés si nécessaire.--
+--
+
+=== !
+image::images/jep467/commentbefore.png[alt="Description", width=800]
+=== !
+
+=== !
+image::images/jep467/commentAfter.png[alt="Description", width=800]
+=== !
+
+--
+[.step]
+* *Lisibilité améliorée* : Markdown est plus simple à lire directement dans le code source.
+* *Moins de balises techniques* : <p>, <ul>, <li>, et les autres balises HTML sont remplacées par une syntaxe beaucoup plus concise.
+* *Flexibilité* : il permet tout de même d'inclure du HTML pour des structures que Markdown ne prend pas en charge nativement.
+--

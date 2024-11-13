@@ -1,0 +1,44 @@
+
+== JEP 447 Statements before super (preview)
+
+
+[%notitle]
+=== Contenu des parties
+
+=== Java 21 et inférieur :
+
+=== !
+
+image::images/jep447/jep447_voiture_avant_jep447.png[alt="Description", width=800]
+
+[.notes]
+--
+* Quand une classe extend une autre classe , il est nécessaire d’appeler le constructeur de la classe parente dans le constructeur
+de la classe enfant. Dans ce cas, la JVM impose que cet appel soit la toute première instruction du constructeur.
+* Ceci permet de s’assurer que tous les champs de la classe parente sont initialisés avant la construction de la classe enfant.
+--
+=== !
+
+=== Java 22 avec la JEP 447 preview :
+
+--
+
+[.step]
+* La JEP 447 est une fonctionnalité en preview qui autorise des instructions avant l’appel du constructeur parent tant que ceux-ci n’accèdent pas à l’instance en cours de création.
+
+--
+
+=== !
+image::images/jep447/jep447_voiture_avec_jep447.png[alt="Description", width=800]
+[.notes]
+--
+* La fonctionnalité JEP 447, actuellement en préversion, assouplit cette règle en permettant l’exécution de certaines
+instructions avant l’appel au constructeur parent, à condition que celles-ci n’interagissent pas avec l’instance en cours de création.
+--
+=== !
+
+[.step]
+* Les variables d'instance de la classe enfant ne sont pas utilisées avant que super() soit appelé.
+* Les champs et méthodes hérités du parent ne sont accessibles qu'après son initialisation.
+* L'introduction de la JEP 447 n'affecte pas les versions antérieures, c'est à dire qu'on peut continuer à mettre notre super() avant des instructions si
+* Cela ouvre la  voie à de nouvelles possibilités, telles que la validation des paramètres ou le pré-calcul des arguments, avant d’initialiser la classe parente.

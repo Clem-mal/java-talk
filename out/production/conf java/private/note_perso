@@ -1,0 +1,15 @@
+JVM :
+La JVM (Java Virtual Machine) est une composante fondamentale de l'écosystème Java. C'est un programme qui exécute les applications Java en les interprétant
+et/ou les compilant en code machine pour l'ordinateur hôte. Voici quelques concepts clés à propos de la JVM :
+    Exécution du bytecode Java : Lorsque tu écris un programme Java, il est d'abord compilé en bytecode par le compilateur Java (javac).
+    Ce bytecode est une forme intermédiaire du code qui n'est pas spécifique à une machine mais à la JVM.
+    La JVM est ensuite chargée d'interpréter ou de compiler ce bytecode en code machine spécifique à la plateforme sur laquelle il est exécuté.
+
+    Gestion de la mémoire : La JVM gère automatiquement la mémoire utilisée par une application Java. Elle inclut un garbage collector qui libère
+    la mémoire utilisée par les objets qui ne sont plus référencés, empêchant ainsi les fuites de mémoire et optimisant la gestion des ressources.
+
+
+    _______________________________________________________________________
+ INTERPOLATION
+    L'interpolation de chaînes est une technique qui permet d'incorporer des expressions ou des variables dans des chaînes de caractères
+     de manière fluide, sans avoir à recourir à la concaténation ou à des méthodes comme String.format().

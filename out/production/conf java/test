@@ -1,0 +1,32 @@
+
+
+NUMA -> CREATION DE LA BDD <-
+
+La premiere Feature :
+
+creer un compte (auth google)
+
+
+chaque compte aura une :
+_ Ma cave a vin
+
+_ profile
+nom
+prenom
+email
+
+une cave à vin contiendra les donnees suivante :
+_type de vins
+_region viticole
+_cepage
+_nbre de bouteilles
+
+chaque vin :
+_information sur le vins(bio, naturel...)
+_cepage
+_nom du proprietaire
+_année
+_couleur du vin_
+_type de sol
+_climat
+_type de récolte
