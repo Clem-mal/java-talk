@@ -1,39 +1,83 @@
 == GATHERER
 
-On parle de Java utils stream,
+[%notitle]
+=== Les Streams, rappel
+
+=== LES STREAMS :
+
+--
+
+[.step]
+* *Java utils stream*
+* les streams sont des *interface*
+* il peut y avoir *plusieurs* implémentations, même si dans la plus-pars des cas on utilisera java utils stream
+--
+
+[.notes]
+--
+* On parle de Java utils stream,
 les streams sont juste des interface, il peut y avoir plusieurs implémentation, meme si dans la prluspars des cas on utilisera java utils stream
+--
 
-sur un stream on peut faire deux type d opération
-_intermediaire (filter, map...) -> on peut enchainer ces opéraitons
-_ opération terminal, on ne peut plus rien faire après (anymatch, findFirst, collect, count...)
+=== Deux type d opérations
 
-JAVA 21 -> on rajoute la notion de gatherer, qui se situe dans l'opération intermediaire
-Gatherer -> C'est une API, qui permet de définir n'importe quel information intermediaire
+--
+[.step]
+* *intermediaire* (filter, map...)
+* opération *terminal* (anymatch, findFirst, collect, count...)
+--
+
+[.notes]
+--
+* (filter, map...)
+* on ne peut plus rien faire après (anymatch, findFirst, collect, count...)
+--
+
+=== Gatherer
+
+--
+[.step]
+* *Gatherer* -> C'est une API, qui permet de définir n'importe quel *opération intermediaire*
+--
+
 
 === !
-image::images/gatherer/interface_gather.png.png[alt="Description", width=800]
-===
+image::images/gatherer/interface_gather.png[alt="Description", width=800]
+=== !
 
-la methode gather prends en parametre un gatherer
-Gahterer => type generique, qui possède 3 parametres
-Gatherer<String, ?, String>
-_les données en entée
-_état éventuel qu'on peut etre amener à ajouter.
-_les données en sortie
+=== Description
 
-Gatherer.of => permet de creer un gatherer
+--
+[.step]
+* Gatherer<String, ?, String>
+* la methode gather prends en parametre un gatherer
+* Gatherer => type generique, qui possède 3 parametres
+* Gatherer.of => permet de creer un gatherer
+* notre opération intermediaire va pouvoir conserver un état, donc prendre des décisions en fonction de ce qu'il c'est passé avant ou après
+--
 
--> notre opération intermediaire va pouvoir conserver un état, donc prendre des décisions en fonction de ce qu'il c'est passé avant ou après
+[.notes]
+--
+* Gatherer<String, ?, String>
+* _les données en entée
+* _état éventuel qu'on peut etre amener à ajouter.
+*  _les données en sortie
+--
 
-réimplemtation du map et de filter en gatherer
+=== Description Gatherer.of
 
-Creation intermediaire : Envoyer / pousser des valeurs vers l'oparation suivante
-exemple : Le filter, si le predicate renvoie vrai, alors on pousse les valeurs, si il renvoit faux, on pousse pas
+--
+[.step]
+* Gatherer.of() utilises *4 fonctions*
+* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état)
+* *integrator* reçoit cet état, donc il peut changer l' état pour X raisons
+* *combiner* si je fais des calculs en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
+differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
+* *finisher* prends des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
+--
 
-Gerer les états de notre opérations intermediaire :
-Gatherer.of() utilises 4 fonctions
-_ initializer => permet de creer un état -> en fournissant un supplier (fonction qui permet de créer cet état)
-_ integrator => reçoit cet état, donc il peut changer l' état pour X raisons
-_ combiner => si je fais des calculs en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états surs
-different thread, comment ça correspond à un seul état ( si opération intermediaire créer des listes, le combiner ça peut etre la concatenation des listes))
-_ finisher => prends des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
+[.notes]
+--
+* Creation intermediaire : Envoyer / pousser des valeurs vers l'oparation suivante
+* exemple : Le filter, si le predicate renvoie vrai, alors on pousse les valeurs, si il renvoit faux, on pousse pas
+--

@@ -14,14 +14,17 @@
 * *Interpolation* de chaîne de carractère
 * methode public static final, automatiquement importé
 
+=== Avant
 
 === !
+=== Avant
 image::images/jep459/stringTemplateAvant.png[alt="Description", width=800]
 === !
 
 === !
 image::images/jep459/stringTemplateAvecStringFormat.png[alt="Description", width=800]
 === !
+
 
 === !
 image::images/jep459/stringTemplateAvecjep459.png[alt="Description", width=800]

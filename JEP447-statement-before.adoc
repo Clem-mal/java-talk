@@ -8,7 +8,7 @@
 === Java 21 et inférieur :
 
 === !
-
+=== Avant
 image::images/jep447/jep447_voiture_avant_jep447.png[alt="Description", width=800]
 
 [.notes]
@@ -29,6 +29,7 @@ de la classe enfant. Dans ce cas, la JVM impose que cet appel soit la toute prem
 --
 
 === !
+=== Avec la JEP447
 image::images/jep447/jep447_voiture_avec_jep447.png[alt="Description", width=800]
 [.notes]
 --
@@ -40,5 +41,5 @@ instructions avant l’appel au constructeur parent, à condition que celles-ci 
 [.step]
 * Les variables d'instance de la classe enfant ne sont pas utilisées avant que super() soit appelé.
 * Les champs et méthodes hérités du parent ne sont accessibles qu'après son initialisation.
-* L'introduction de la JEP 447 n'affecte pas les versions antérieures, c'est à dire qu'on peut continuer à mettre notre super() avant des instructions si
+* L'introduction de la JEP 447 n'affecte pas les versions antérieures, c'est à dire qu'on peut continuer à mettre notre super() avant des instructions
 * Cela ouvre la  voie à de nouvelles possibilités, telles que la validation des paramètres ou le pré-calcul des arguments, avant d’initialiser la classe parente.

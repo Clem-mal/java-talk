@@ -9,10 +9,11 @@
 
 include::introduction.adoc[]
 include::objectifs.adoc[]
-include::JEP447.adoc[]
-include::JEP456.adoc[]
-include::JEP457.adoc[]
-include::JEP459.adoc[]
-include::JEP467.adoc[]
+include::JEP447-statement-before.adoc[]
+include::JEP456-unamed-variables.adoc[]
+include::JEP457-class-file-api.adoc[]
+include::JEP459-string-template.adoc[]
+include::JEP467-markdown.adoc[]
+include::gatherer.adoc[]
 
 
