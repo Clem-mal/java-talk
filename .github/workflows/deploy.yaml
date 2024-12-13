@@ -31,7 +31,10 @@ jobs:
 
       - name: Copy build to folder 📦
         run: |
-          mkdir -p build/reveal.js/dist && \
+          mkdir -p reveal.js/dist/theme/images && \
+          cp theme/logo.png reveal.js/dist/theme/images/ && \
+          cp theme/gop.css reveal.js/dist/theme/ && \
+          mkdir -p build/reveal.js/dist && \          
           cp -r *.html images code build/ && \
           cp -r reveal.js/dist/* build/reveal.js/dist/ && \
           cp -r reveal.js/plugin build/reveal.js/
