@@ -1,5 +1,5 @@
 name: Build and Deploy
-on: [ push ]
+on: [push]
 permissions:
   contents: write
 jobs:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Copy build to folder 📦
         run: |
-          mkdir -p build/reveal.js/dist && \          
+          mkdir -p build/reveal.js/dist && \
           cp -r *.html images code build/ && \
           cp -r reveal.js/dist/* build/reveal.js/dist/ && \
           cp -r reveal.js/plugin build/reveal.js/
@@ -42,3 +42,4 @@ jobs:
         with:
           folder: build # The folder the action should deploy.
           branch: gh-pages
+          clean: false
