@@ -1,5 +1,5 @@
 name: Build and Deploy
-on: [push]
+on: [ push ]
 permissions:
   contents: write
 jobs:
@@ -45,4 +45,3 @@ jobs:
         with:
           folder: build # The folder the action should deploy.
           branch: gh-pages
-          clean: false
