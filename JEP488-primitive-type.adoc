@@ -1,0 +1,87 @@
+==  JEP 488 : Primitive Types in Patterns, instanceof, and switch
+
+=== Pour le switch
+
+[source, java]
+----
+public String check(Object o) {
+    return switch(o) {
+        case Integer i -> "C'est un entier";
+        case String s -> "C'est une chaîne";
+        case Car c -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
+----
+
+[.notes]
+--
+* Depuis Java 7, l'instruction switch a beaucoup évolué. Au début, elle ne permettait de comparer que des entiers. Puis,
+Java 8 a permis de comparer des chaînes de caractères et des énumérations. Java 12 a introduit la possibilité de renvoyer des valeurs à
+partir d'un bloc switch et d'avoir plusieurs valeurs dans un seul case. Java 17 a ajouté la possibilité de comparer des types dans une
+instruction switch plutôt que des valeurs.
+--
+
+[.notes]
+--
+* Ce code permet d'effectuer un pattern matching sur des types de référence comme Integer, String, et des classes définies par l'utilisateur.
+--
+
+=== Instance of
+
+L'opérateur instanceof est utilisé pour vérifier si une valeur appartient à un certain type.
+
+[source, java]
+----
+if (obj instanceof Integer value) {
+    return value + value;
+}
+----
+
+[%notitle]
+=== Pour le Instance of
+
+En Java 23, les types primitifs peuvent aussi être utilisés avec le pattern matching dans instanceof (int float boolean...)
+
+[source, java]
+----
+if (obj instanceof int) {
+    return "C'est un entier primitif";
+}
+----
+[%notitle]
+=== Pour le switch
+
+Dans les switch, vous pouvez également utiliser des types primitifs comme boolean, float, double, long :
+
+[source, java]
+----
+switch (user.isLoggedIn()) {
+    case true -> user.id();
+    case false -> -1;
+}
+----
+
+=== Pattern Matching avec les Records
+
+Les records sont supportés par le pattern matching :
+Java effectuera automatiquement la correspondance des champs d'un record sans avoir besoin d'extraire les valeurs explicitement.
+
+[source, java]
+----
+record Position(int xCoordinate, int yCoordinate) {}
+
+void printSum(Object obj) {
+    if (obj instanceof Position(int xCoordinate, int yCoordinate)) {
+        System.out.println(xCoordinate + yCoordinate);
+    }
+}
+----
+
+=== Conlusion
+
+[.step]
+* Des fonctionnalités *puissantes*
+* La prise en charge des *types primitifs*,
+* La *simplification* du code
+* Réduction des *risques* d'erreurs de type grâce à un casting implicite.

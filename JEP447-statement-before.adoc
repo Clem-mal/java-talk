@@ -22,10 +22,8 @@ de la classe enfant. Dans ce cas, la JVM impose que cet appel soit la toute prem
 === Java 22 avec la JEP 447 preview :
 
 --
-
 [.step]
-* La JEP 447 est une fonctionnalité en preview qui autorise des instructions avant l’appel du constructeur parent tant que ceux-ci n’accèdent pas à l’instance en cours de création.
-
+* La JEP 447 est une fonctionnalité en *preview* qui autorise des instructions dans le corps d’un *constructeur Java*, *avant* l’appel du constructeur.
 --
 
 === !
@@ -38,8 +36,16 @@ instructions avant l’appel au constructeur parent, à condition que celles-ci 
 --
 === !
 
+=== Conlusion
 [.step]
-* Les variables d'instance de la classe enfant ne sont pas utilisées avant que super() soit appelé.
-* Les champs et méthodes hérités du parent ne sont accessibles qu'après son initialisation.
-* L'introduction de la JEP 447 n'affecte pas les versions antérieures, c'est à dire qu'on peut continuer à mettre notre super() avant des instructions
+* *La validation des arguments* ne nécessite plus l'utilation de méthodes auxiliaires
+* *Les variables d'instance* de la classe enfant ne sont pas utilisées *avant* que super() *soit appelé*.
+* Les champs et méthodes hérités du parent ne sont accessibles qu'*après* son initialisation.
+* On peut continuer à mettre notre super() avant des instructions
+
+
+[.notes]
+--
 * Cela ouvre la  voie à de nouvelles possibilités, telles que la validation des paramètres ou le pré-calcul des arguments, avant d’initialiser la classe parente.
+--
+

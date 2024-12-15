@@ -12,5 +12,8 @@
 === JAVA 23
     * JEP 455 - Primitive Types in Patterns, instanceof, and switch
     * JEP 467 - Markdown Documentation Comments
-    * JEP 456 - Unnamed Variables & Patterns
     * JEP 473 - Stream Gatherers
+
+[.step]
+=== ET JAVA 24 ?
+

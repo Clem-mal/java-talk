@@ -1,5 +1,5 @@
 
-== JEP 459 String Templates (second preview)
+== JEP 465 String Templates (3eme preview)
 
 [%notitle]
 === Contenu des parties
@@ -10,32 +10,48 @@
 --
 
 [.step]
+* *Interpolation* de chaîne de carractère réduisant la complexité de la syntaxe comparée aux utilisations traditionnelles.
+* *améliorer* la sécurité en validant les chaînes dynamiques destinées à des systèmes tiers, comme SQL, JSON ou HTML.
 * STR est un *template processor*, défini par java, inclus dans la JDK
-* *Interpolation* de chaîne de carractère
-* methode public static final, automatiquement importé
 
-=== Avant
+[source, java]
+----
+String name = "Joan";
+String info = STR."My name is \{name}";
+System.out.println(info);  // "My name is Joan"
+----
 
-=== !
-=== Avant
-image::images/jep459/stringTemplateAvant.png[alt="Description", width=800]
-=== !
+[.notes]
+--
+* Un template expression se compose d'un template processor (par exemple, STR), du texte de modèle et des expressions à évaluer.
+--
 
-=== !
-image::images/jep459/stringTemplateAvecStringFormat.png[alt="Description", width=800]
-=== !
+=== Avantage
+[.step]
+* Rend la lecture du code *lisible*.
+* *Sécurisant*, en offrant des mécanismes de validation automatique (comme l'échappement des caractères spéciaux pour SQL ou HTML).
 
 
-=== !
-image::images/jep459/stringTemplateAvecjep459.png[alt="Description", width=800]
-=== !
-
-=== !
-image::images/jep459/stringTemplateAvecMethode.png[alt="Description", width=800]
-=== !
+[source, java]
+----
+STR."SELECT * FROM users WHERE name = :name AND age > :age"
+----
 
 [.step]
-* *Réduire la verbosité* du code..
-* *Gérer les expressions* dans des chaînes de manière plus concise.
-* *Améliorer la sécurité*, en particulier dans des contextes sensibles comme SQL ou JSON.
-* Personnaliser les traitements de chaînes via des *template processors*
+* Simplification de la composition de chaînes : Cela permet d'inclure facilement des valeurs calculées à l'exécution dans des chaînes de caractères.
+* Lisibilité améliorée : La syntaxe permet de mélanger facilement texte et expressions tout en maintenant la clarté du code.
+* Sécurité accrue : En permettant la validation et la transformation des chaînes, cette fonctionnalité aide à prévenir des vulnérabilités telles que les injections SQL.
+* Flexibilité : Les bibliothèques Java peuvent définir des syntaxes de formatage spécifiques pour ces modèles.
+* Interaction avec d'autres langages : Elle simplifie l'utilisation d'APIs qui attendent des chaînes écrites dans des langages non Java, comme SQL, XML ou JSON.
+* Création de valeurs non chaîne : La possibilité de créer directement des objets à partir de texte structuré et d'expressions sans passer par une chaîne intermédiaire.
+
+=== Et pour les DATES ?
+[.step]
+* *Correction* des problèmes liés à la manipulation des fuseaux horaires
+* Amélioration de la *robustesse* et la *consistance* de la gestion des dates/heures
+
+[.notes]
+--
+* Cela aide à prévenir des erreurs logiques, des incohérences de fuseau horaire,
+et des problèmes de formatage des dates qui pourraient indirectement nuire à la sécurité de l'application.
+--

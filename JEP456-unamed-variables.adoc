@@ -10,6 +10,13 @@
 * permet d’utiliser _ comme pattern ou variable anonyme
 --
 
+[.notes]
+--
+ * Introduire dans le langage Java des variables et des motifs non nommés, représentés par le caractère souligné _.
+Cela permet de déclarer des variables ou des motifs nécessaires mais jamais utilisés, clarifiant ainsi l’intention des développeurs et réduisant les erreurs potentielles.
+--
+
+
 === !
 image::images/jep456/incrementAvantFeature.png[alt="Description", width=800]
 === !
@@ -27,6 +34,7 @@ image::images/jep456/connexionAvecFeature.png[alt="Description", width=800]
 === !
 
 [.step]
+* Introduit en preview avec le JDK 21, cette fonctionnalité est *finalisée* sans modifications dans le *JDK 22*.
 * *Lisibilité améliorée* en supprimant les variables inutiles.
 * La variable ne rentre pas dans le scop.
 * *Réduction des avertissements* de variables non utilisées lors de la compilations.
@@ -35,5 +43,5 @@ image::images/jep456/connexionAvecFeature.png[alt="Description", width=800]
 
 [.notes]
 --
-JEP 456 est une évolution pragmatique pour rendre le code Java plus propre et plus expressif, tout en simplifiant la gestion des variables inutiles dans des situations spécifiques.
+* JEP 456 est une évolution pragmatique pour rendre le code Java plus propre et plus expressif, tout en simplifiant la gestion des variables inutiles dans des situations spécifiques.
 --
