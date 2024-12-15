@@ -4,11 +4,8 @@
 [%notitle]
 === Contenu des parties
 
---
+permet d’utiliser _ comme pattern ou variable anonyme
 
-[.step]
-* permet d’utiliser _ comme pattern ou variable anonyme
---
 
 [.notes]
 --
@@ -16,22 +13,54 @@
 Cela permet de déclarer des variables ou des motifs nécessaires mais jamais utilisés, clarifiant ainsi l’intention des développeurs et réduisant les erreurs potentielles.
 --
 
+[%notitle]
+=== Avant apres
 
-=== !
-image::images/jep456/incrementAvantFeature.png[alt="Description", width=800]
-=== !
+[source, java]
+----
+ List<String> names = List.of("Thomas", "nicolas", "alice", "gérard");
+        int count = 0;
+        for(String name: names){
+            count++;
+        }
+        System.out.println(" le compte est de : " + count);
+----
 
-=== !
-image::images/jep456/incrementBeforeFeature.png[alt="Description", width=800]
-=== !
+[source, java]
+----
 
-=== !
-image::images/jep456/connexionAvantFeature.png[alt="Description", width=800]
-=== !
+      List<String> names = List.of("Thomas", "nicolas", "alice", "gérard");
+        int count = 0;
+        for(String _: names){
+            count++;
+        }
+        System.out.println(" le compte est de : " + count);
+    }
 
-=== !
-image::images/jep456/connexionAvecFeature.png[alt="Description", width=800]
-=== !
+----
+
+[%notitle]
+=== Avec pattern
+
+[source, java]
+----
+   try {
+            Connection connect = DriverManager.getConnection("localhost", "onepoint", "free");
+        } catch (SQLException sql) {
+            System.out.println("ce n'est pas free");
+        }
+----
+
+[source, java]
+----
+      try {
+            Connection _ = DriverManager.getConnection("localhost", "onepoint", "free");
+        } catch (SQLException sql) {
+            System.out.println("ce n'est pas free");
+        }
+----
+
+
 
 [.step]
 * Introduit en preview avec le JDK 21, cette fonctionnalité est *finalisée* sans modifications dans le *JDK 22*.
