@@ -62,9 +62,9 @@ public class Application {
                 .toList();*/
 
         var result = texts.stream()
-              /*  .gather(filter())*/
-                /*.gather(tantQue())*/
-                .gather(limit())
+                /*.gather(filter())*/
+                .gather(tantQue())
+               /* .gather(limit())*/
                 .toList();
 
         System.out.println(result);
