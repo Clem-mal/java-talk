@@ -1,24 +1,35 @@
 
 == JEP 467 – Markdown Documentation Comments
 
-[%notitle]
-=== Contenu des parties
+[.notes]
+--
+* Markdown est un langage de balisage léger conçu pour être facile à écrire et à lire,
+tout en permettant une conversion rapide en HTML pour un rendu visuel. Il est largement utilisé pour la documentation,
+les README dans les projets (par exemple sur GitHub), les blogs techniques et plus encore.
+--
 
 === Pourquoi ?
 [.step]
-* L'HTML est désormais considéré comme *fastidieux* à écrire et *difficile à lire*.
+* L'HTML est considéré *difficile à lire*
+* Les balises {@link} et {@code} pas *intuitif*
+* Markdown plus *simple* et plus *lisible*
+* *Compatible* avec *JavaDoc existantes* et les *éléments HTML*.
+* Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
+
+[.notes]
+--
+* * L'HTML est désormais considéré comme *fastidieux* à écrire et *difficile à lire*.
 * Les balises JavaDoc en ligne, comme {@link} et {@code}, sont pas forcément intuitif.
 * Markdown propose un format plus *simple* et plus *lisible* pour les constructions courantes (les paragraphes, les listes, les liens).
-
-[.step]
 * *Faciliter l'écriture* et la lecture des commentaires JavaDoc en permettant l'utilisation de la syntaxe *Markdown*.
 * *Maintenir la compatibilité* avec les balises *JavaDoc existantes* et les éléments HTML.
 * Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
+--
 
 [%notitle]
 === Contenu des parties
 
-[source, java]
+[source, markdown]
 ----
 /**
  * Calcule la somme de deux nombres.
@@ -39,7 +50,7 @@ public int add(int a, int b) {
 [%notitle]
 === Contenu des parties
 
-[source, java]
+[source, markdown]
 ----
 /// Calcule la somme de deux nombres.
 ///
@@ -68,14 +79,27 @@ public int add(Integer a, Integer b) {
 }
 
 ----
---
-[.step]
-* *Lisibilité améliorée* : Markdown est plus simple à lire directement dans le code source.
-* *Moins de balises techniques* : <p>, <ul>, <li>, et les autres balises HTML sont remplacées par une syntaxe beaucoup plus concise.
-* *Flexibilité* : il permet tout de même d'inclure du HTML pour des structures que Markdown ne prend pas en charge nativement.
+
+[.notes]
 --
 
-[source, java]
+Après la JEP 467, vous pouvez utiliser des en-têtes Markdown pour introduire des sections comme # Paramètres, # Retour, et # Exceptions,
+et même ajouter des exemples de code dans des blocs de code Markdown.
+* On utilise le ///
+* En résumé, le JEP 467 vise à rendre la documentation Java plus accessible et plus facile à maintenir,
+en offrant une alternative plus conviviale à l'HTML.
+* offrant plus de flexibilité pour intégrer des balises personnalisées, mettre en surbrillance du code, et travailler
+avec des fichiers Markdown externes. Cela améliore la lisibilité et la gestion des commentaires dans la documentation Java.
+--
+
+=== Conclusion
+
+[.step]
+* *Lisibilité améliorée*
+* *Moins de balises techniques*
+* *Flexibilité*
+
+[source, markdown]
 ----
 /// Exemple :
 ///
@@ -85,15 +109,12 @@ public int add(Integer a, Integer b) {
 /// public class HelloWorld { }
 ----
 
-
 [.notes]
 --
-* Avant la JEP 467, vous deviez utiliser des balises JavaDoc classiques comme @param, @return, et @throws pour structurer les informations.
-Après la JEP 467, vous pouvez utiliser des en-têtes Markdown pour introduire des sections comme # Paramètres, # Retour, et # Exceptions,
-et même ajouter des exemples de code dans des blocs de code Markdown.
-* On utilise le ///
+
+* *Lisibilité améliorée* : Markdown est plus simple à lire directement dans le code source.
+* *Moins de balises techniques* : <p>, <ul>, <li>, et les autres balises HTML sont remplacées par une syntaxe beaucoup plus concise.
+* *Flexibilité* : il permet tout de même d'inclure du HTML pour des structures que Markdown ne prend pas en charge nativement.
 * En résumé, le JEP 467 vise à rendre la documentation Java plus accessible et plus facile à maintenir,
 en offrant une alternative plus conviviale à l'HTML.
-* offrant plus de flexibilité pour intégrer des balises personnalisées, mettre en surbrillance du code, et travailler
-avec des fichiers Markdown externes. Cela améliore la lisibilité et la gestion des commentaires dans la documentation Java.
 --

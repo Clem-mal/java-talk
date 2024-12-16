@@ -16,16 +16,21 @@ public String check(Object o) {
 
 [.notes]
 --
-* Depuis Java 7, l'instruction switch a beaucoup évolué. Au début, elle ne permettait de comparer que des entiers. Puis,
-Java 8 a permis de comparer des chaînes de caractères et des énumérations. Java 12 a introduit la possibilité de renvoyer des valeurs à
-partir d'un bloc switch et d'avoir plusieurs valeurs dans un seul case. Java 17 a ajouté la possibilité de comparer des types dans une
-instruction switch plutôt que des valeurs.
+* Ce code permet d'effectuer un pattern matching sur des types de référence comme Integer, String, et des classes définies par l'utilisateur.
+donc on regarde de quel type est notre objet, dès que ça match on renvoie le string correspondant
 --
 
-[.notes]
---
-* Ce code permet d'effectuer un pattern matching sur des types de référence comme Integer, String, et des classes définies par l'utilisateur.
---
+[source, java]
+----
+public String check(Object o) {
+    return switch(o) {
+        case int i -> "C'est un entier";
+        case float  s -> "C'est un nombre à virgule";
+        case Car c -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
+----
 
 === Instance of
 
@@ -38,21 +43,20 @@ if (obj instanceof Integer value) {
 }
 ----
 
-[%notitle]
-=== Pour le Instance of
-
-En Java 23, les types primitifs peuvent aussi être utilisés avec le pattern matching dans instanceof (int float boolean...)
-
 [source, java]
 ----
 if (obj instanceof int) {
     return "C'est un entier primitif";
 }
 ----
+
+[.notes]
+--
+* Avec Java 23, les types primitifs peuvent aussi être utilisés avec le pattern matching dans instanceof (int float boolean...)
+--
+
 [%notitle]
 === Pour le switch
-
-Dans les switch, vous pouvez également utiliser des types primitifs comme boolean, float, double, long :
 
 [source, java]
 ----
@@ -61,6 +65,11 @@ switch (user.isLoggedIn()) {
     case false -> -1;
 }
 ----
+
+[.notes]
+--
+* Avec Java 23, les types primitifs peuvent aussi être utilisés un boolean
+--
 
 === Pattern Matching avec les Records
 
@@ -78,7 +87,13 @@ void printSum(Object obj) {
 }
 ----
 
-=== Conlusion
+[.notes]
+--
+* Les records sont supportés par le pattern matching :
+Java effectuera automatiquement la correspondance des champs d'un record sans avoir besoin d'extraire les valeurs explicitement.
+--
+
+=== Conclusion
 
 [.step]
 * Des fonctionnalités *puissantes*

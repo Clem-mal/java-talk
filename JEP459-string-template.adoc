@@ -1,8 +1,6 @@
 
-== JEP 465 String Templates (3eme preview)
+== JEP 459 String Templates (2eme preview)
 
-[%notitle]
-=== Contenu des parties
 
 [.notes]
 --
@@ -13,6 +11,12 @@
 * *Interpolation* de chaîne de carractère réduisant la complexité de la syntaxe comparée aux utilisations traditionnelles.
 * *améliorer* la sécurité en validant les chaînes dynamiques destinées à des systèmes tiers, comme SQL, JSON ou HTML.
 * STR est un *template processor*, défini par java, inclus dans la JDK
+
+[.notes]
+--
+* Un template processor est un outil utilisé pour générer dynamiquement du contenu en remplissant des "blancs"
+dans des modèles (templates) avec des données spécifiques.
+--
 
 [source, java]
 ----
@@ -28,8 +32,10 @@ System.out.println(info);  // "My name is Joan"
 
 === Avantage
 [.step]
-* Rend la lecture du code *lisible*.
-* *Sécurisant*, en offrant des mécanismes de validation automatique (comme l'échappement des caractères spéciaux pour SQL ou HTML).
+* *Lisible*.
+* *Sécurisant*,
+* *Simplicité*,
+* *Flexibilité*,
 
 
 [source, java]
@@ -37,13 +43,15 @@ System.out.println(info);  // "My name is Joan"
 STR."SELECT * FROM users WHERE name = :name AND age > :age"
 ----
 
-[.step]
-* Simplification de la composition de chaînes : Cela permet d'inclure facilement des valeurs calculées à l'exécution dans des chaînes de caractères.
+[.notes]
+--
 * Lisibilité améliorée : La syntaxe permet de mélanger facilement texte et expressions tout en maintenant la clarté du code.
-* Sécurité accrue : En permettant la validation et la transformation des chaînes, cette fonctionnalité aide à prévenir des vulnérabilités telles que les injections SQL.
+* en offrant des mécanismes de validation automatique (comme l'échappement des caractères spéciaux pour SQL ou HTML).
+* Simplification de la composition de chaînes : Cela permet d'inclure facilement des valeurs calculées à l'exécution dans des chaînes de caractères.
 * Flexibilité : Les bibliothèques Java peuvent définir des syntaxes de formatage spécifiques pour ces modèles.
-* Interaction avec d'autres langages : Elle simplifie l'utilisation d'APIs qui attendent des chaînes écrites dans des langages non Java, comme SQL, XML ou JSON.
-* Création de valeurs non chaîne : La possibilité de créer directement des objets à partir de texte structuré et d'expressions sans passer par une chaîne intermédiaire.
+Interaction avec d'autres langages : Elle simplifie l'utilisation d'APIs qui attendent des chaînes écrites dans des langages non Java, comme SQL, XML ou JSON.
+Création de valeurs non chaîne : La possibilité de créer directement des objets à partir de texte structuré et d'expressions sans passer par une chaîne intermédiaire.
+--
 
 === Et pour les DATES ?
 [.step]
@@ -52,6 +60,6 @@ STR."SELECT * FROM users WHERE name = :name AND age > :age"
 
 [.notes]
 --
-* Cela aide à prévenir des erreurs logiques, des incohérences de fuseau horaire,
+* Cela aide à prévenir des erreurs logiques, des incohérences de fuseau horaire, nottamenet heure été hiver
 et des problèmes de formatage des dates qui pourraient indirectement nuire à la sécurité de l'application.
 --

@@ -1,9 +1,13 @@
 
 == JEP 447 Statements before super (preview)
 
-
-[%notitle]
-=== Contenu des parties
+[.notes]
+--
+* java 22
+* Nous permets d'écrire des instructions dans un constructeur avant un appel explicite à un autre constructeur (via super(...) ou this(...)),
+tant qu'elles ne référencent pas l'instance en cours de création.
+Cela permet une meilleure flexibilité dans les constructeurs tout en maintenant l'ordre d'initialisation descendant des classes.
+--
 
 === Java 21 et inférieur :
 
@@ -23,8 +27,6 @@
     }
 
 ----
-
-
 
 [.notes]
 --
@@ -63,7 +65,7 @@ instructions avant l’appel au constructeur parent, à condition que celles-ci 
 --
 === !
 
-=== Conlusion
+=== Conclusion
 [.step]
 * *La validation des arguments* ne nécessite plus l'utilation de méthodes auxiliaires
 * *Les variables d'instance* de la classe enfant ne sont pas utilisées *avant* que super() *soit appelé*.

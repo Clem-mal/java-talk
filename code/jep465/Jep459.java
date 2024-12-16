@@ -1,4 +1,7 @@
-package code.jep459;
+/*
+package code.jep465;
+
+import java.sql.PreparedStatement;
 
 public class Jep459 {
 
@@ -25,9 +28,9 @@ public class Jep459 {
 
 
     private String stringTemplate1() {
-       String name = "Clement";
-       String programmingLanguage = "Java";
-        return STR."Mon nom est \{name} j'aime beaucoup le \{programmingLanguage}";
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE name = ?");
+        stmt.setString(1, userInput);
+
 
 
     }
@@ -56,3 +59,4 @@ public class Jep459 {
                 CONST_1, CONST_2, CONST_3, CONST_4, CONST_5, CONST_6, CONST_7, CONST_8, CONST_9, CONST_10, CONST_11, CONST_12, CONST_13, CONST_14, CONST_15, CONST_16, CONST_17, CONST_18, CONST_19, CONST_20);
     }
 }
+*/
