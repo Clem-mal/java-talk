@@ -62,7 +62,7 @@ public class Application {
                 .toList();*/
 
         var result = texts.stream()
-                /*.gather(filter())*/
+              /*  .gather(filter())*/
                 .gather(tantQue())
                /* .gather(limit())*/
                 .toList();
