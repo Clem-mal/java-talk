@@ -1,5 +1,5 @@
 
-== Objectifs
+== Programme
 
 [.step]
 === JAVA 22

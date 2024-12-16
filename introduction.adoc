@@ -19,7 +19,7 @@ _Les nouveautés Java 22 et Java 23_
 
 [.step]
 * Contenu - _Parcourir les features et les previews de Java 22 et Java 23_
-* Motivation - _Découvrir les nouveautés, les appliquées sur nos projets_
+* Motivation - _Découvrir les nouveautés, les appliquer sur nos projets_
 
 
 [%notitle.columns.is-vcentered.transparency]
@@ -46,8 +46,6 @@ Développeur Back-End
 
 image:images/onepoint.png[width=200]
 
-[.vertical-align-middle]
-icon:github[] https://github.com/Clem-mal[Github]
 ****
 
 [.notes]

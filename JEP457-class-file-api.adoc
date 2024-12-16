@@ -1,41 +1,71 @@
 
 == JEP 457 – Class-File API (Preview)
 
-[%notitle]
-=== Contenu des parties
-
-=== Objectifs :
-
---
+=== Class-File API
 
 [.step]
-* *API standard* pour manipuler les fichiers de classe Java
-* directement dans le *JDK*
-* permettant de *parser*, *générer*, et *transformer* les fichiers
+* *API standard* pour interagir avec les fichiers .class
+* Accessible via le package java.lang.classfile.
+* Permet une sécurité accrue et meilleure maintenance grâce à la standardisation dans le JDK.
+
+
+[.notes]
+--
+* Avant Java 22, pour analyser et manipuler les fichiers de classe java (.class) : obligation de passer par des bibliothèques externes
+comme ASM ou BCEL.
+--
+
+=== Avant la JEP 457
+
+[source, java]
+----
+import org.objectweb.asm.ClassReader;
+import java.io.IOException;
+
+public class ClassNameExtractor {
+    public static void main(String[] args) throws IOException {
+        ClassReader classReader = new ClassReader("MyClass");
+        System.out.println("Class name: " + classReader.getClassName());
+    }
+}
+----
+
+=== Après la JEP 457
+
+[source, java]
+----
+import java.lang.classfile.ClassFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class ClassNameExtractor {
+    public static void main(String[] args) throws Exception {
+        Path classFilePath = Path.of("MyClass.class");
+        byte[] classBytes = Files.readAllBytes(classFilePath);
+
+        ClassFile classFile = ClassFile.read(classBytes);
+        System.out.println("Class name: " + classFile.thisClass().name());
+    }
+}
+----
+
+=== Avantages
+
+--
+[.step]
+* Standardisation
+* Simplicité
+* Compatibilité et sécurité
+* Optimisation
 --
 
 [.notes]
 --
-* Actuellement, il existe de nombreuses librairies dans l'écosystème Java, comme ASM, BCEL, et Javassist, qui permettent
-ce genre de manipulation, mais cette JEP vise à fournir une solution native et unifiée au sein du JDK lui-même.
+* Standardisation : Plus besoin de blibliothèque tierces (ASM, BCEL), Api maintenue par l'équipe JAVA
+* Simplicité : Manipulation des .class plus simple, Api intuitive et bien documentée
+* Compatibilité et sécurité : L'Api évolue avec le JDK (format des .class) -> moins de risque d'erreur ou de problème de compatibilité
+* Optimisation : Utilisation native évitant les risques des dépendances externes (surchage, incompatibilité)
 --
 
-
-=== Avant la Class-File Api de Java 22
---
-[.step]
-* librairie existantes : *ASM*, *BCEL*, et *Javassist*
-* contraintes : attendre une mise à jour de ces librairie à chaque nouvelle version de java
---
-
-=== Avantage
-
---
-[.step]
-* Fournir une API stable
-* Assurer la *compatibilité* entre l’API et les nouvelles versions de Java, en éliminant la dépendance à des bibliothèques tierces (comme ASM)
-* *Évolution avec le JDK* : Comme le format de fichier de classe évolue à chaque nouvelle version de Java, l’API Class-File évoluera également..
-* Rendre la *manipulation des fichiers de classe plus sûre* en *intégrant* cette fonctionnalité au *JDK lui-même*.
---
 
 

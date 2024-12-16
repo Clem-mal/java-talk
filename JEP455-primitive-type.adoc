@@ -1,6 +1,6 @@
-==  JEP 488 : Primitive Types in Patterns, instanceof, and switch
+==  JEP 455 : Primitive Types in Patterns, instanceof, and switch (Preview)
 
-=== Pour le switch
+=== Switch
 
 [source, java]
 ----
@@ -55,8 +55,7 @@ if (obj instanceof int) {
 * Avec Java 23, les types primitifs peuvent aussi être utilisés avec le pattern matching dans instanceof (int float boolean...)
 --
 
-[%notitle]
-=== Pour le switch
+=== Switch
 
 [source, java]
 ----

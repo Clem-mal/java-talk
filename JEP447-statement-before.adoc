@@ -4,15 +4,11 @@
 [.notes]
 --
 * java 22
-* Nous permets d'écrire des instructions dans un constructeur avant un appel explicite à un autre constructeur (via super(...) ou this(...)),
-tant qu'elles ne référencent pas l'instance en cours de création.
-Cela permet une meilleure flexibilité dans les constructeurs tout en maintenant l'ordre d'initialisation descendant des classes.
+* instruction appelable avant le super (sous certaines conditions)
+* ne pas referencer l'objet encours de création
 --
 
 === Java 21 et inférieur :
-
-=== !
-=== Avant
 [source, java]
 ----
     private String marque;
@@ -36,15 +32,14 @@ de la classe enfant. Dans ce cas, la JVM impose que cet appel soit la toute prem
 --
 === !
 
-=== Java 22 avec la JEP 447 preview :
+=== Java 22 :
 
 --
 [.step]
 * La JEP 447 est une fonctionnalité en *preview* qui autorise des instructions dans le corps d’un *constructeur Java*, *avant* l’appel du constructeur.
 --
 
-=== !
-=== Avec la JEP447
+=== Java 22 :
 [source, java]
 ----
 public Voiture(String marque) {
@@ -67,7 +62,7 @@ instructions avant l’appel au constructeur parent, à condition que celles-ci 
 
 === Conclusion
 [.step]
-* *La validation des arguments* ne nécessite plus l'utilation de méthodes auxiliaires
+* *La validation des arguments* ne nécessite plus l'utilisation de méthodes auxiliaires
 * *Les variables d'instance* de la classe enfant ne sont pas utilisées *avant* que super() *soit appelé*.
 * Les champs et méthodes hérités du parent ne sont accessibles qu'*après* son initialisation.
 * On peut continuer à mettre notre super() avant des instructions

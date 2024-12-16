@@ -1,76 +1,71 @@
 
 == JEP 456 – Unnamed Variables & Patterns
 
-[%notitle]
-=== Contenu des parties
 
-permet d’utiliser _ comme pattern ou variable anonyme
+=== JEP 456 – Unnamed Variables & Patterns
+
+Permet d’utiliser le caractère "_" comme pattern ou variable anonyme
 
 [.notes]
 --
-* Introduit en preview avec le JDK 21, cette fonctionnalité est finalisée sans modifications dans le JDK 22.
-* JEP 456 est une évolution pragmatique pour rendre le code Java plus propre et plus expressif,
-tout en simplifiant la gestion des variables inutiles dans des situations spécifiques.
-* Introduire dans le langage Java des variables et des motifs non nommés, représentés par le caractère souligné _.
-Cela permet de déclarer des variables ou des motifs nécessaires mais jamais utilisés, clarifiant ainsi l’intention des développeurs et réduisant les erreurs potentielles.
+* Introduit en preview avec le JDK 21, elle est finalisée dans le JDK 22.
+* le but est de rendre le code plus propre et plus expressif
+* en simplifiant la gestion des variables non utilisée
 --
 
-[%notitle]
-=== Avant apres
+=== Avant la JEP 456
 
 [source, java]
 ----
- List<String> names = List.of("Thomas", "nicolas", "alice", "gérard");
+        List<String> names = List.of("Thomas", "nicolas", "alice", "gérard");
         int count = 0;
-        for(String name: names){
+        for (String name : names) {
             count++;
         }
         System.out.println(" le compte est de : " + count);
 ----
-
 [source, java]
 ----
-
-      List<String> names = List.of("Thomas", "nicolas", "alice", "gérard");
-        int count = 0;
-        for(String _: names){
-            count++;
-        }
-        System.out.println(" le compte est de : " + count);
-    }
-
-----
-
-[%notitle]
-=== Avec pattern
-
-[source, java]
-----
-   try {
+        try {
             Connection connect = DriverManager.getConnection("localhost", "onepoint", "free");
         } catch (SQLException sql) {
             System.out.println("ce n'est pas free");
         }
 ----
 
+=== Après la JEP 456
+
 [source, java]
 ----
-      try {
+
+        List<String> names = List.of("Thomas", "nicolas", "alice", "gérard");
+        int count = 0;
+        for (String _ : names) {
+            count++;
+        }
+        System.out.println(" le compte est de : " + count);
+----
+[source, java]
+----
+        try {
             Connection _ = DriverManager.getConnection("localhost", "onepoint", "free");
         } catch (SQLException sql) {
             System.out.println("ce n'est pas free");
         }
 ----
 
-
+=== Conclusion
 
 [.step]
-* *Lisibilité améliorée* en supprimant les variables inutiles.
-* *Réduction des avertissements* de variables non utilisées lors de la compilations.
-* *Meilleure gestion* du pattern matching, lorsque certains éléments du modèle ne sont pas pertinents.
-* *Réduction de la charge cognitive* pour les développeurs en éliminant les variables sans intérêt.
+* *Lisibilité améliorée*
+* *Réduction des avertissements*
+* *Meilleure gestion*
+* *Réduction de la charge cognitive*
 
 [.notes]
 --
-* JEP 456 est une évolution pragmatique pour rendre le code Java plus propre et plus expressif, tout en simplifiant la gestion des variables inutiles dans des situations spécifiques.
+* *Lisibilité améliorée* en supprimant les variables inutiles.
+* *Réduction des avertissements* de variables non utilisées lors de la compilation.
+* *Meilleure gestion* du pattern matching, lorsque certains éléments du modèle ne sont pas pertinents.
+* *Réduction de la charge cognitive* pour les développeurs en éliminant les variables sans intérêt.
 --

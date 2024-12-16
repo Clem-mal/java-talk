@@ -1,39 +1,94 @@
 == GATHERER
 
-On parle de Java utils stream,
-les streams sont juste des interface, il peut y avoir plusieurs implémentation, meme si dans la prluspars des cas on utilisera java utils stream
+[.notes]
+--
+* ils sont arrivé en preview avec java 22, mais avant de vous parler des Gatherer, on va refaire
+le point sur les Streams!
+--
 
-sur un stream on peut faire deux type d opération
-_intermediaire (filter, map...) -> on peut enchainer ces opéraitons
-_ opération terminal, on ne peut plus rien faire après (anymatch, findFirst, collect, count...)
+[%notitle]
+=== Les Streams, rappel
 
-JAVA 21 -> on rajoute la notion de gatherer, qui se situe dans l'opération intermediaire
-Gatherer -> C'est une API, qui permet de définir n'importe quel information intermediaire
+=== LES STREAMS :
+
+--
+
+[.step]
+* *Java utils stream*
+* les streams sont des *interface*
+* il peut y avoir *plusieurs* implémentations, même si dans la plus-pars des cas on utilisera java utils stream
+--
+
+[.notes]
+--
+* On parle de Java utils stream,
+les streams sont juste des interface, il peut y avoir differentes implémentation,
+meme si dans la prlus pars des cas on utilisera java utils stream, ce n'est pas obligation comme n'importe qu'elle autre interface
+--
+
+=== Deux type d opérations
+
+[source, java]
+----
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "Frank");
+
+        List<String> result = names.stream()
+                                   .filter(name -> name.startsWith("A") || name.startsWith("B"))
+                                   .map(String::toUpperCase)
+                                   .collect(Collectors.toList()); // Collecter dans une liste
+
+
+        System.out.println(result); // [ALICE, BOB]
+----
+
+--
+[.step]
+* *intermediaire*
+* opération *terminal*
+--
+
+[.notes]
+--
+* (filter, map...), on peut par exemple enchainer map filter sans jamais s'arrêter
+* on ne peut plus rien faire après (anymatch, findFirst, collect, count...)
+on peut mettre un hook et faire ce qu'on veut a la fin du stream grâce au collector
+* collect qui prend un parametre un collector, il existe plein d'implementation qui sont dans les collectors, mais on peut nous aussi
+reimplémenter ces opérations finales
+--
+
+=== Gatherer
+
+--
+[.step]
+* *Gatherer* -> C'est une API, qui permet de définir n'importe quel *opération intermediaire*
+--
 
 === !
-image::images/gatherer/interface_gather.png.png[alt="Description", width=800]
-===
+image::images/gatherer/interface_gather.png[alt="Description", width=800]
+[.notes]
+--
+* Le Gatherer est un type generique
+* methode gather prends en parametre un gatherer qui a 3 types 1 les données en entrées,
+les données en sorties en 2 eme, et au milieu c'est l'état eventuel qu'on peut être amener à vouloir ajouter dans notre gatherer
+* notre opération intermediaire va pouvoir conserver un état, donc prendre des décisions en fonction de ce qu'il c'est passé avant ou après
+--
+=== !
 
-la methode gather prends en parametre un gatherer
-Gahterer => type generique, qui possède 3 parametres
-Gatherer<String, ?, String>
-_les données en entée
-_état éventuel qu'on peut etre amener à ajouter.
-_les données en sortie
+=== Description Gatherer.of
 
-Gatherer.of => permet de creer un gatherer
+--
+[.step]
+* Gatherer.of() utilises *4 fonctions*
+* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état)
+* *integrator* reçoit cet état, donc il peut changer l' état pour X raisons
+* *combiner* si je fais des calculs en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
+differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
+* *finisher* prends des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
+--
 
--> notre opération intermediaire va pouvoir conserver un état, donc prendre des décisions en fonction de ce qu'il c'est passé avant ou après
-
-réimplemtation du map et de filter en gatherer
-
-Creation intermediaire : Envoyer / pousser des valeurs vers l'oparation suivante
-exemple : Le filter, si le predicate renvoie vrai, alors on pousse les valeurs, si il renvoit faux, on pousse pas
-
-Gerer les états de notre opérations intermediaire :
-Gatherer.of() utilises 4 fonctions
-_ initializer => permet de creer un état -> en fournissant un supplier (fonction qui permet de créer cet état)
-_ integrator => reçoit cet état, donc il peut changer l' état pour X raisons
-_ combiner => si je fais des calculs en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états surs
-different thread, comment ça correspond à un seul état ( si opération intermediaire créer des listes, le combiner ça peut etre la concatenation des listes))
-_ finisher => prends des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
+[.notes]
+--
+* Pour créer un gatherer on utilise gatheter.of (comme collectors)
+* Creation intermediaire : Envoyer / pousser des valeurs vers l'oparation suivante
+* exemple : Le filter, si le predicate renvoie vrai, alors on pousse les valeurs, si il renvoit faux, on pousse pas
+--
