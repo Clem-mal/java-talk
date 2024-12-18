@@ -1,10 +1,9 @@
 
-[%notitle]
-== Pres
+== Les nouveautés Java 22 et Java 23
 
-image::images/Java-Emblem.jpg[width=500]
+image::images/logo-java-512.png[width=500]
 [role="font-size: 200px"]
-_Les nouveautés Java 22 et Java 23_
+
 
 [.notes]
 --

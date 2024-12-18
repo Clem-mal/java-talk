@@ -69,13 +69,39 @@ List<String> result = names.stream()
 * a contrario, le filter ne conserve pas d'état
 --
 
+[%notitle]
+=== Le gatherer avec etat
+--
+[.step]
+* Gatherer.of() utilises *4 fonctions*
+* *initializer*  permet de creer un état en fournissant un supplier
+* *integrator* reçoit cet état
+* *combiner* si je fais des calculs en parallèle
+* *finisher* traite états restant
+--
+
+[.notes]
+--
+* Evidemment avec un état, c'est pas aussi simple !
+* on a plusieurs méthodes qui nous permettent de gérer nos états
+* Gatherer.of() utilises *4 fonctions*
+* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état)
+* *integrator* reçoit cet état, donc il peut changer l' état , c'est là ou tout se passe
+* *combiner* si je fais des threadsq en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
+differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
+* *finisher* traite des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
+--
+
 === Le gatherer sans etat
 
 [source,java]
 ----
-List<String> artistes = List.of("Les Casseurs Flotteurs", "Les Cowboys Fringuants", "Hans zimmer", "The offspring");
+List<String> artistes = List.of("Les Casseurs Flotteurs",
+                                "Les Cowboys Fringuants",
+                                "Hans Zimmer",
+                                "The offspring");
 
- static Gatherer<String, ?, String> filter() {
+ static Gatherer<String, ?, String> filterEndWithS() {
         return Gatherer.of((state, element, downstream) -> {
             if (element.endsWith("s")) {
                 return downstream.push(element);
@@ -100,9 +126,12 @@ var result = texts.stream()
 === Gatherer
 [source,java]
 ----
-List<String> artistes = List.of("Les Casseurs Flotteurs", "Les Cowboys Fringuants", "Hans Zimmer", "The offspring");
+List<String> artistes = List.of("Les Casseurs Flotteurs",
+                                "Les Cowboys Fringuants",
+                                "Hans Zimmer",
+                                "The offspring");
 
-   static Gatherer<String, ?, String> takeWhile() {
+   static Gatherer<String, ?, String> takeWhileNameStartWithL() {
         return Gatherer.of((state, element, downstream) -> {
             if (element.startsWith("L")) {
                 return downstream.push(element);
@@ -121,35 +150,15 @@ var result = texts.stream()
 
 === Le gatherer avec etat
 
---
-[.step]
-* Gatherer.of() utilises *4 fonctions*
-* *initializer*  permet de creer un état en fournissant un supplier
-* *integrator* reçoit cet état
-* *combiner* si je fais des calculs en parallèle
-* *finisher* prends des états restant
---
-
-[.notes]
---
-* Evidemment avec un état, c'est pas aussi simple !
-* on a plusieurs méthodes qui nous permettent de gérer nos états
-* Gatherer.of() utilises *4 fonctions*
-* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état)
-* *integrator* reçoit cet état, donc il peut changer l' état , c'est là ou tout se passe
-* *combiner* si je fais des threadsq en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
-differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
-* *finisher* prends des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
---
 
 [%notitle]
 === Le gatherer avec etat
 [source,java]
 ----
-    static Gatherer<String, ?, String> limit() {
+    static Gatherer<String, ?, String> limitFirstThreeElement() {
 
         return Gatherer.of(
-                //initialize
+                //initializer
                 () -> new Counter(0),
                 (state, element, downstream) -> {
                     //integrator
@@ -165,11 +174,13 @@ differents threads, comment les faire correspondre à un seul état (le combiner
                 }
         );
     }
-
-    var result = texts.stream()
-                .gather(limit())
-                .toList();
 //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants, Hans Zimmer]
 ----
+
+[.notes]
+--
+* C'était intéressant tout ça hein ?
+* Mais personnellement je n'ai pas encore trouver de cas précis dans le quel on utilisera des gatherers
+--
 
 

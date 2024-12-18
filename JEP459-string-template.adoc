@@ -17,16 +17,18 @@
 
 [source, java]
 ----
-String name = "Clément";
-int age = 33;
+String name ="Clément";
 // Concaténation classique
-String result1 = "Name: " + name + ", Age: " + age;
+String message1 = name + ", vous souhaite bienvenue chez" + onepoint ;
 
 // Avec le String.format
-String result2 = String.format("Name: %s, Age: %d", name, age);
+String message2 = String.format("%s, vous souhaite bienvenue chez %s", name, onepoint);
 
 // Avec le MessageFormat
-String message = MessageFormat.format("Bonjour {0}, vous avez {1} ans.", name, age);
+String message3 = MessageFormat.format("{0}, vous souhaite bienvenue chez {1}.", name, onepoint);
+
+// Avec le .formatted
+String message4 = "%s, vous souhaite bienvenue chez %s".formatted(name, onepoint);
 
 ----
 
@@ -41,12 +43,10 @@ String message = MessageFormat.format("Bonjour {0}, vous avez {1} ans.", name, a
 
 [source, java]
 ----
-String name = "Clément";
-int age = 33;
-String result1 = STR."Name: \{name}, Age: \{age}";
+STR."Name: \{name}, Age: \{age}";
 
 // En text block (multi-ligne)
-String result2 = STR."""
+STR."""
     {
       "name": \{name},
       "age": \{age},
@@ -60,13 +60,13 @@ String result2 = STR."""
 [source, java]
 ----
 String userInput = "Clément'; DROP TABLE users; --";
-String query = STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
+STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
 
 //résultat sans le SQLSafeProcessor
-SELECT * FROM users WHERE name = 'John'; DROP TABLE users; --'
+SELECT * FROM users WHERE name = 'Clément'; DROP TABLE users; --'
 
 //résultat avec le SQLSafeProcessor
-SELECT * FROM users WHERE name = 'John''; DROP TABLE users; --'
+SELECT * FROM users WHERE name = 'Clément'; DROP TABLE users; --'
 
 
 String html = STR(HtmlEscaper)."Hello, \{userInput}!";
@@ -77,6 +77,23 @@ String html = STR(HtmlEscaper)."Hello, \{userInput}!";
 * SQLSafeProcessor permet d'échapper  la valeur de userInput pour éviter les injections SQL.
 * Les strings template permettent d'utiliser les proccessor de template comme un SQLProcessor ou un HtmlEscaper : pour valider ou transformer les expressions dynamiques
 * réduit les risques d'injection SQL, XSS (cross-site scripting), ou d'autres vecteurs exploitant une concaténation ou interpolation non sécurisée.
+--
+
+=== Et pour les dates ?
+
+[source, java]
+----
+STR."Today's date is \{LocalDate.now()}";
+
+DateTimeFormatter.ofPattern("dd/MM/yyyy");
+STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
+----
+
+[.notes]
+--
+* Interpolation direct avec la stucture date
+* Facile a personnalisé grâce au processor
+* Bon la mauvaise nouvelle c'est que cette feature pose problème à la communauté et apparement... toute la feature est annulé.  Il travail sur une autre feature.. a suivre!
 --
 
 === Récap
@@ -96,20 +113,4 @@ String html = STR(HtmlEscaper)."Hello, \{userInput}!";
 * Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
 --
 
-=== Et pour les dates ?
 
-[source, java]
-----
-LocalDate date = LocalDate.now();
-String message = STR."Today's date is \{date}";
-
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-String message2 = STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
-----
-
-[.notes]
---
-* Interpolation direct avec la stucture date
-* Facile a personnalisé grâce au processor
-* Bon la mauvaise nouvelle c'est que cette feature pose problème à la communauté et apparement... toute la feature est annulé.  Il travail sur une autre feature.. a suivre!
---

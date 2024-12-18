@@ -15,7 +15,7 @@ image::images/jep467/commentbefore.png[alt="Description", width=800]
 [%notitle]
 === photoApres
 
-image::images/jep467/commentAfter.png[alt="Description", width=800]
+image::images/jep467/markdown.png[alt="Description", width=800]
 
 [%notitle]
 === javaDoc
@@ -82,8 +82,6 @@ public int subtract(int x, int y) {
 * *Moins de balises techniques*
 * *Flexibilité*
 * *Compatible* avec *JavaDoc existantes* et les *éléments HTML*.
-* Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
-
 
 [.notes]
 --
@@ -91,7 +89,6 @@ public int subtract(int x, int y) {
 * *Lisibilité améliorée* : Markdown est plus simple à lire directement dans le code source.
 * *Moins de balises techniques* : <p>, <ul>, <li>, et les autres balises HTML sont remplacées par une syntaxe beaucoup plus concise.
 * *Flexibilité* : il permet tout de même d'inclure du HTML pour des structures que Markdown ne prend pas en charge nativement.
-* *Maintenir la compatibilité* avec les balises *JavaDoc existantes* et les éléments HTML.
 * Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
 * En résumé, le JEP 467 vise à rendre la documentation Java plus accessible et plus facile à maintenir,
 en offrant une alternative plus conviviale à l'HTML.
@@ -101,5 +98,5 @@ en offrant une alternative plus conviviale à l'HTML.
 === Récap
 [source, markdown]
 ----
-/// Vivement la : 🍺
+/// Vivement la 🍺
 ----

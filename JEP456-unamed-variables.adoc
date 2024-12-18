@@ -13,21 +13,7 @@
 
 === Avant la feature
 
-[source, java]
-----
-public String check(Object o) {
-    return switch(o) {
-        case int i -> "C'est un entier";
-        case float  s -> "C'est un nombre à virgule";
-        case Car c -> "C'est un objet Car";
-        default -> "Je ne sais pas ce que c'est";
-    };
-}
-
-BiFunction<Integer, String, Integer> processAOnly = (a, b) -> a * 2;
-
-
-----
+image::images/jep456/stringTemplateimagetermine.png[alt="Description", width=800]
 
 [.notes]
 --
@@ -42,9 +28,9 @@ BiFunction<Integer, String, Integer> processAOnly = (a, b) -> a * 2;
 ----
 public String check(Object o) {
     return switch(o) {
-        case int _ -> "C'est un entier";
+        case Integer _ -> "C'est un entier";
         case float  _ -> "C'est un nombre à virgule";
-        case Car _ -> "C'est un objet Car";
+        case Voiture _ -> "C'est un objet Car";
         default -> "Je ne sais pas ce que c'est";
     };
 }
@@ -57,7 +43,6 @@ BiFunction<Integer, String, Integer> processAOnly = (a, _) -> a * 2;
 [.step]
 * *Lisibilité améliorée*
 * *Réduction des avertissements*
-* *Meilleure gestion*
 * *Réduction de la charge cognitive*
 
 [.notes]
@@ -65,6 +50,5 @@ BiFunction<Integer, String, Integer> processAOnly = (a, _) -> a * 2;
 * Java a enfin pris une fonctionnalité interessante de nos amis fronteux -> oui, ca existe depuis longtemps chez eux !
 * *Lisibilité améliorée* en supprimant les variables inutiles.
 * *Réduction des avertissements* de variables non utilisées lors de la compilation.
-* *Meilleure gestion* du pattern matching, lorsque certains éléments du modèle ne sont pas pertinents.
 * *Réduction de la charge cognitive* pour les développeurs en éliminant les variables sans intérêt.
 --
