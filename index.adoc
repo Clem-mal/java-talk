@@ -8,13 +8,14 @@
 :revealjs_pdfseparatefragments: false
 
 include::introduction.adoc[]
-include::Programme.adoc[]
+include::Programme22.adoc[]
 include::JEP447-statement-before.adoc[]
 include::JEP456-unamed-variables.adoc[]
-include::JEP457-class-file-api.adoc[]
 include::JEP459-string-template.adoc[]
+include::Programme23.adoc[]
+include::JEP455-primitive-type.adoc[]
 include::JEP467-markdown.adoc[]
 include::gatherer.adoc[]
-include::JEP455-primitive-type.adoc[]
-include::java24.adoc[]
+include::conclusion.adoc[]
+
 

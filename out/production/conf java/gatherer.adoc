@@ -6,27 +6,7 @@
 le point sur les Streams!
 --
 
-[%notitle]
-=== Les Streams, rappel
-
 === LES STREAMS :
-
---
-
-[.step]
-* *Java utils stream*
-* les streams sont des *interface*
-* il peut y avoir *plusieurs* implémentations, même si dans la plus-pars des cas on utilisera java utils stream
---
-
-[.notes]
---
-* On parle de Java utils stream,
-les streams sont juste des interface, il peut y avoir differentes implémentation,
-meme si dans la prlus pars des cas on utilisera java utils stream, ce n'est pas obligation comme n'importe qu'elle autre interface
---
-
-=== Deux type d opérations
 
 [source, java]
 ----
@@ -35,7 +15,7 @@ List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "F
         List<String> result = names.stream()
                                    .filter(name -> name.startsWith("A") || name.startsWith("B"))
                                    .map(String::toUpperCase)
-                                   .collect(Collectors.toList()); // Collecter dans une liste
+                                   .collect(Collectors.toList());
 
 
         System.out.println(result); // [ALICE, BOB]
@@ -53,7 +33,7 @@ List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "F
 * on ne peut plus rien faire après (anymatch, findFirst, collect, count...)
 on peut mettre un hook et faire ce qu'on veut a la fin du stream grâce au collector
 * collect qui prend un parametre un collector, il existe plein d'implementation qui sont dans les collectors, mais on peut nous aussi
-reimplémenter ces opérations finales
+reimplémenter nous même ces opérations finales
 --
 
 === Gatherer
@@ -75,6 +55,9 @@ les données en sorties en 2 eme, et au milieu c'est l'état eventuel qu'on peut
 === !
 
 === Description Gatherer.of
+
+=== !
+image::images/gatherer/interface_gather.png[alt="Description", width=800]
 
 --
 [.step]

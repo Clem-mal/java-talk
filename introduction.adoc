@@ -1,7 +1,3 @@
-[%notitle]
-== Debut
-
-image::images/ROBOT.png[background, size=content]
 
 [%notitle]
 === Intro
@@ -12,14 +8,8 @@ _Les nouveautés Java 22 et Java 23_
 
 [.notes]
 --
+* J'ai sélectionné pour une partie des fonctionnalités qui me parraissait interessante
 --
-
-[%notitle]
-=== Contenu des parties
-
-[.step]
-* Contenu - _Parcourir les features et les previews de Java 22 et Java 23_
-* Motivation - _Découvrir les nouveautés, les appliquer sur nos projets_
 
 
 [%notitle.columns.is-vcentered.transparency]
@@ -50,8 +40,8 @@ image:images/onepoint.png[width=200]
 
 [.notes]
 --
+* Je vais vous parlez des features java 22 sortis en mars 2024 et java 23 sortie en septembre 2024
 * vous retrouverez sur github :
 ** les *slides*
 ** tous les *outils évoqués* durant le talk
-** et pour ceux que je vais vous montrer, un *README expliquant comment les utiliser*
 --

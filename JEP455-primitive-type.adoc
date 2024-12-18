@@ -1,4 +1,5 @@
-==  JEP 455 : Primitive Types in Patterns, instanceof, and switch (Preview)
+
+==  Primitive Types in Patterns, instanceof, and switch (Preview)
 
 === Switch
 
@@ -7,7 +8,7 @@
 public String check(Object o) {
     return switch(o) {
         case Integer i -> "C'est un entier";
-        case String s -> "C'est une chaîne";
+        case int s -> "Ceci est un type primitif";
         case Car c -> "C'est un objet Car";
         default -> "Je ne sais pas ce que c'est";
     };
@@ -67,7 +68,7 @@ switch (user.isLoggedIn()) {
 
 [.notes]
 --
-* Avec Java 23, les types primitifs peuvent aussi être utilisés un boolean
+* Avec Java 23, les types primitifs peuvent aussi être utilisés  avec des boolean
 --
 
 === Pattern Matching avec les Records
@@ -92,7 +93,7 @@ void printSum(Object obj) {
 Java effectuera automatiquement la correspondance des champs d'un record sans avoir besoin d'extraire les valeurs explicitement.
 --
 
-=== Conclusion
+=== Récap
 
 [.step]
 * Des fonctionnalités *puissantes*

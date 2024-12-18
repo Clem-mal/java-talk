@@ -1,0 +1,5 @@
+== JAVA 23
+[.step]
+* JEP 455 - Primitive Types in Patterns, instanceof, and switch
+* JEP 467 - Markdown Documentation Comments
+* JEP 473 - Stream Gatherers

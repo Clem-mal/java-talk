@@ -1,6 +1,5 @@
 
-== JEP 459 String Templates
-=== String Templates
+== String Templates
 
 [.step]
 * Permet de créer des chaînes de caractères dynamiques en intégrant du text statique et des expressions dynamiques
@@ -10,11 +9,11 @@
 
 [.notes]
 --
-* text block : JEP 355 Java 13 -> chaîne de carractère multi-ligne ( gérer avec 3 guillemets ("""))
-* (2eme preview) // TODO POUR LA 3eme preview java 24
+* text block : Java 13 -> chaîne de carractère multi-ligne ( gérer avec 3 guillemets ("""))
+* (2eme preview)
 --
 
-=== Avant
+=== Java 21 et avant
 
 [source, java]
 ----
@@ -25,15 +24,20 @@ String result1 = "Name: " + name + ", Age: " + age;
 
 // Avec le String.format
 String result2 = String.format("Name: %s, Age: %d", name, age);
+
+// Avec le MessageFormat
+String message = MessageFormat.format("Bonjour {0}, vous avez {1} ans.", name, age);
+
 ----
 
 [.notes]
 --
 * 1er exemple avec la concaténation classique : La concaténation est peu lisible et peut entraîner des erreurs.
 * 2eme exemple le string format : String.format est sensible aux mauvais types passés aux placeholders (%s, %d, etc.).
+* 2eme exemple le MessageFormat : Pas très lisible
 --
 
-=== Avec JEP 459
+=== Avec la feature
 
 [source, java]
 ----
@@ -55,17 +59,27 @@ String result2 = STR."""
 
 [source, java]
 ----
+String userInput = "Clément'; DROP TABLE users; --";
 String query = STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
+
+//résultat sans le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'John'; DROP TABLE users; --'
+
+//résultat avec le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'John''; DROP TABLE users; --'
+
+
 String html = STR(HtmlEscaper)."Hello, \{userInput}!";
 ----
 
 [.notes]
 --
+* SQLSafeProcessor permet d'échapper  la valeur de userInput pour éviter les injections SQL.
 * Les strings template permettent d'utiliser les proccessor de template comme un SQLProcessor ou un HtmlEscaper : pour valider ou transformer les expressions dynamiques
 * réduit les risques d'injection SQL, XSS (cross-site scripting), ou d'autres vecteurs exploitant une concaténation ou interpolation non sécurisée.
 --
 
-=== Avantages
+=== Récap
 [.step]
 * *Lisibilité*
 * *Sécurité*
@@ -97,4 +111,5 @@ String message2 = STR(DateFormatterProcessor.of(formatter))."Today's date is \{d
 --
 * Interpolation direct avec la stucture date
 * Facile a personnalisé grâce au processor
+* Bon la mauvaise nouvelle c'est que cette feature pose problème à la communauté et apparement... toute la feature est annulé.  Il travail sur une autre feature.. a suivre!
 --

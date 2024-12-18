@@ -1,0 +1,13 @@
+== JAVA 22
+[.step]
+* JEP 447 - Statements before super (Preview)
+* JEP 456 - Unnamed Variables & Patterns
+* JEP 459 - String Templates
+
+[.notes]
+--
+* Dans le talk je vais être amener à parler de preview,  donc pour rappel la preview est :
+* donc c'est une fonctionalité qui est incluse dans une version spécifique
+* mais qui est encore en phase d'évaluation
+* pour y avoir accès : il faut activé le "feature enable preview" dans votre IDE
+--
