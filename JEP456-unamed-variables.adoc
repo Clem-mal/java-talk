@@ -15,24 +15,18 @@
 
 [source, java]
 ----
-        Map<String, Integer> scores = Map.of(
-            "Alice", 85,
-            "Bob", 75,
-            "Charlie", 90,
-            "David", 60
-        );
+public String check(Object o) {
+    return switch(o) {
+        case int i -> "C'est un entier";
+        case float  s -> "C'est un nombre à virgule";
+        case Car c -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
 
-        Map<String, Integer> filteredScores = scores.entrySet()
-            .stream()
-            .filter(entry -> entry.getValue() >= 80)
-            .collect(Collectors.toMap(
-                entry -> entry.getKey(),
-                entry -> entry.getValue()
-            ));
+BiFunction<Integer, String, Integer> processAOnly = (a, b) -> a * 2;
 
-        // Affichage des résultats
-        Nom : Alice, Score : 85
-        Nom : Charlie, Score : 90
+
 ----
 
 [.notes]
@@ -46,23 +40,16 @@
 
 [source, java]
 ----
-          Map<String, Integer> scores = Map.of(
-            "Alice", 85,
-            "Bob", 75,
-            "Charlie", 90,
-            "David", 60
-        );
-        Map<String, Integer> filteredScores = scores.entrySet()
-            .stream()
-            .filter(_ -> _.getValue() <= 80)
-            .collect(Collectors.toMap(
-                _ -> _.getKey(),
-                _ -> _.getValue()
-            ));
-        // Affichage des résultats
-        Nom : David, Score : 60
-        Nom : Bob, Score : 75
-    }
+public String check(Object o) {
+    return switch(o) {
+        case int _ -> "C'est un entier";
+        case float  _ -> "C'est un nombre à virgule";
+        case Car _ -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
+
+BiFunction<Integer, String, Integer> processAOnly = (a, _) -> a * 2;
 ----
 
 === Récap
