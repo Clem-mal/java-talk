@@ -38,7 +38,7 @@ List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "F
 
 --
 [.step]
-* *Gatherer* -> C'est une API, qui permet de définir n'importe quel *opération intermediaire*
+* *Gatherer* -> C'est une API, qui permet de définir n'importe quelle *opération intermediaire*
 --
 
 [%notitle]

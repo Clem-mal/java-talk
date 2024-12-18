@@ -1,6 +1,6 @@
 
 [%notitle]
-=== Intro
+== Pres
 
 image::images/Java-Emblem.jpg[width=500]
 [role="font-size: 200px"]
