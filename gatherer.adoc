@@ -77,8 +77,8 @@ List<String> result = names.stream()
 * Gatherer.of() utilises *4 fonctions*
 * *initializer*  permet de creer un état en fournissant un supplier
 * *integrator* reçoit cet état
-* *combiner* si je fais des calculs en parallèle
-* *finisher* traite états restant
+* *combiner* pour les calculs en parallèle
+* *finisher* traite les états restants
 --
 
 [.notes]
