@@ -47,7 +47,7 @@ List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "F
 [source,java]
 ----
 List<String> result = names.stream()
-                            .gather(Gatherers.fold()...)).toList()
+                            .gather(Gatherers.fold(...)).toList()
 ----
 
 [.notes]
@@ -56,6 +56,7 @@ List<String> result = names.stream()
 * et cette methode gather elle prend un gatherer
 * pour ceux qui ont déja vu l'api des collectors, ça marche pareil (avec la methode collect)
 * donc dans la methode Gatherers on a pleins de gatherer qui sont déja prédifinis
+* nottament le .fold, qui permet de faire une agrégation de plusieurs valeur en une donnée unique
 * mais nous on va surtout voir comment on en créer
 --
 
