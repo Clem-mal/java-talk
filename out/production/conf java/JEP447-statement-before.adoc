@@ -1,0 +1,63 @@
+
+== Statements before super (preview)
+
+[.notes]
+--
+* C 'est le fait d'ajouter des instruction avant l'appel au constructeur parent : super()'
+* A la condition : de ne pas referencer l'objet qui encours de création
+--
+
+=== Java 21 et inférieur :
+[source, java]
+----
+    private String marque;
+
+    public Voiture(String marque) {
+        super();
+        if (marque == null || marque.isEmpty()) {
+            throw new IllegalArgumentException("La marque ne peut pas être nulle ou vide");
+        }
+        this.marque = marque;
+        System.out.println("Une voiture de la marque " + marque + " est créée");
+    }
+
+----
+
+[.notes]
+--
+* Le compilateur nous impose : que la première chose soit l'appel au constructeur parent
+* ça permet de s’assurer que tous les champs de la classe parente sont initialisés avant la construction de la classe enfant.
+--
+=== !
+
+=== Java 22
+[source, java]
+----
+public Voiture(String marque) {
+        if (marque == null || marque.isEmpty()) {
+            throw new IllegalArgumentException("La marque ne peut pas être nulle ou vide");
+        }
+        super();
+        this.marque = marque;
+        System.out.println("Une voiture de la marque " + marque + " est créée");
+    }
+
+----
+
+[.notes]
+--
+* Cette feature, assouplit cette règle en permettant l’exécution instructions avant l’appel au constructeur parent,
+* à condition de ne pas interagir avec l’instance en cours de création.
+* Si dans le parent il y a des instruction un peu longue : on pas forcément envie de les réaliser si on sait qu'on va throw une exception à l'arriver
+--
+=== !
+
+=== Récap
+[.step]
+* *La validation des arguments* ne nécessite plus l'utilisation de méthodes intermédiares
+* *Les variables d'instance* de la classe enfant ne sont pas utilisées *avant* que super() *soit appelé*.
+* Les champs et méthodes hérités du parent ne sont accessibles qu'*après* son initialisation.
+* On peut continuer à mettre notre *super()* avant des instructions
+
+
+

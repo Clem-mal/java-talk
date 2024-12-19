@@ -1,0 +1,20 @@
+:docinfo: private
+:source-highlighter: highlight.js
+:autofit-option:
+:icons: font
+:revealjs_slideNumber: true
+:revealjs_theme: gop
+:revealjs_history: true
+:revealjs_pdfseparatefragments: false
+
+include::introduction.adoc[]
+include::Programme22.adoc[]
+include::JEP447-statement-before.adoc[]
+include::JEP456-unamed-variables.adoc[]
+include::JEP459-string-template.adoc[]
+include::Programme23.adoc[]
+include::JEP455-primitive-type.adoc[]
+include::JEP467-markdown.adoc[]
+include::gatherer.adoc[]
+
+

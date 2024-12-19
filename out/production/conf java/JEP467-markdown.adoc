@@ -1,0 +1,105 @@
+
+== Markdown Documentation Comments
+
+[.notes]
+--
+* Markdown : on ne le présente plus, il est facile à écrire et à lire,
+Il est très largement utilisé pour la documentation, les README dans les projets..
+--
+
+[%notitle]
+=== photoAvant
+
+image::images/jep467/commentbefore.png[alt="Description", width=800]
+
+[%notitle]
+=== photoApres
+
+image::images/jep467/commentAfter.png[alt="Description", width=800]
+
+[%notitle]
+=== javaDoc
+
+[source, java]
+----
+/**
+ * Cette méthode prend deux entiers en entrée et retourne leur différence.
+ *
+ * @param x Premier entier pour le calcul.
+ * @param y Deuxième entier pour le calcul.
+ *
+ * <p>Tableau récapitulatif des paramètres :</p>
+ * <table border="1">
+ *   <tr>
+ *     <th>Paramètre</th>
+ *     <th>Description</th>
+ *   </tr>
+ *   <tr>
+ *     <td>x</td>
+ *     <td>Premier entier pour la soustraction</td>
+ *   </tr>
+ *   <tr>
+ *     <td>y</td>
+ *     <td>Deuxième entier pour la soustraction</td>
+ *   </tr>
+ * </table>
+ *
+ * @return La différence absolue entre `x` et `y`.
+ */
+public int subtract(int x, int y) {
+    return Math.abs(x - y);
+}
+----
+
+[%notitle]
+=== Contenu des parties
+
+[source, markdown]
+----
+| Paramètre | Description                                  | Type  |
+|-----------|----------------------------------------------|-------|
+| `x`       | Premier entier pour le calcul de différence  | `int` |
+| `y`       | Deuxième entier pour le calcul de différence | `int` |
+| `return`  | La différence absolue entre `x` et `y`       | `int` |
+
+----
+
+[%notitle]
+=== Avec du code
+
+[source, markdown]
+----
+/// /**
+///  * Bienvenue chez onepoint !
+///  */
+/// public class HelloWorld { }
+----
+
+=== Récap
+
+[.step]
+* *Lisibilité améliorée*
+* *Moins de balises techniques*
+* *Flexibilité*
+* *Compatible* avec *JavaDoc existantes* et les *éléments HTML*.
+* Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
+
+
+[.notes]
+--
+
+* *Lisibilité améliorée* : Markdown est plus simple à lire directement dans le code source.
+* *Moins de balises techniques* : <p>, <ul>, <li>, et les autres balises HTML sont remplacées par une syntaxe beaucoup plus concise.
+* *Flexibilité* : il permet tout de même d'inclure du HTML pour des structures que Markdown ne prend pas en charge nativement.
+* *Maintenir la compatibilité* avec les balises *JavaDoc existantes* et les éléments HTML.
+* Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
+* En résumé, le JEP 467 vise à rendre la documentation Java plus accessible et plus facile à maintenir,
+en offrant une alternative plus conviviale à l'HTML.
+--
+
+[%notitle]
+=== Récap
+[source, markdown]
+----
+/// Vivement la : 🍺
+----

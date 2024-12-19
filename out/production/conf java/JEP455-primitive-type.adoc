@@ -1,0 +1,102 @@
+
+==  Primitive Types in Patterns, instanceof, and switch (Preview)
+
+=== Switch
+
+[source, java]
+----
+public String check(Object o) {
+    return switch(o) {
+        case Integer i -> "C'est un entier";
+        case int s -> "Ceci est un type primitif";
+        case Car c -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
+----
+
+[.notes]
+--
+* Ce code permet d'effectuer un pattern matching sur des types de référence comme Integer, String, et des classes définies par l'utilisateur.
+donc on regarde de quel type est notre objet, dès que ça match on renvoie le string correspondant
+--
+
+[source, java]
+----
+public String check(Object o) {
+    return switch(o) {
+        case int i -> "C'est un entier";
+        case float  s -> "C'est un nombre à virgule";
+        case Car c -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
+----
+
+=== Instance of
+
+L'opérateur instanceof est utilisé pour vérifier si une valeur appartient à un certain type.
+
+[source, java]
+----
+if (obj instanceof Integer value) {
+    return value + value;
+}
+----
+
+[source, java]
+----
+if (obj instanceof int) {
+    return "C'est un entier primitif";
+}
+----
+
+[.notes]
+--
+* Avec Java 23, les types primitifs peuvent aussi être utilisés avec le pattern matching dans instanceof (int float boolean...)
+--
+
+=== Switch
+
+[source, java]
+----
+switch (user.isLoggedIn()) {
+    case true -> user.id();
+    case false -> -1;
+}
+----
+
+[.notes]
+--
+* Avec Java 23, les types primitifs peuvent aussi être utilisés  avec des boolean
+--
+
+=== Pattern Matching avec les Records
+
+Les records sont supportés par le pattern matching :
+Java effectuera automatiquement la correspondance des champs d'un record sans avoir besoin d'extraire les valeurs explicitement.
+
+[source, java]
+----
+record Position(int xCoordinate, int yCoordinate) {}
+
+void printSum(Object obj) {
+    if (obj instanceof Position(int xCoordinate, int yCoordinate)) {
+        System.out.println(xCoordinate + yCoordinate);
+    }
+}
+----
+
+[.notes]
+--
+* Les records sont supportés par le pattern matching :
+Java effectuera automatiquement la correspondance des champs d'un record sans avoir besoin d'extraire les valeurs explicitement.
+--
+
+=== Récap
+
+[.step]
+* Des fonctionnalités *puissantes*
+* La prise en charge des *types primitifs*,
+* La *simplification* du code
+* Réduction des *risques* d'erreurs de type grâce à un casting implicite.

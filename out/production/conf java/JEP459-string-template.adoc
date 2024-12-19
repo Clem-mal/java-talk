@@ -1,0 +1,115 @@
+
+== String Templates
+
+[.step]
+* Permet de créer des chaînes de caractères dynamiques en intégrant du text statique et des expressions dynamiques
+* Format lisible et sécurisé
+* Simplification de la génération de chaînes complexes (SQL, JSON, HTML)
+* Utilisation du symbole *STR* combiné à une approche "text block"
+
+[.notes]
+--
+* text block : Java 13 -> chaîne de carractère multi-ligne ( gérer avec 3 guillemets ("""))
+* (2eme preview)
+--
+
+=== Java 21 et avant
+
+[source, java]
+----
+String name = "Clément";
+int age = 33;
+// Concaténation classique
+String result1 = "Name: " + name + ", Age: " + age;
+
+// Avec le String.format
+String result2 = String.format("Name: %s, Age: %d", name, age);
+
+// Avec le MessageFormat
+String message = MessageFormat.format("Bonjour {0}, vous avez {1} ans.", name, age);
+
+----
+
+[.notes]
+--
+* 1er exemple avec la concaténation classique : La concaténation est peu lisible et peut entraîner des erreurs.
+* 2eme exemple le string format : String.format est sensible aux mauvais types passés aux placeholders (%s, %d, etc.).
+* 2eme exemple le MessageFormat : Pas très lisible
+--
+
+=== Avec la feature
+
+[source, java]
+----
+String name = "Clément";
+int age = 33;
+String result1 = STR."Name: \{name}, Age: \{age}";
+
+// En text block (multi-ligne)
+String result2 = STR."""
+    {
+      "name": \{name},
+      "age": \{age},
+      "isDeveloper": true
+    }
+    """;
+----
+
+=== Processor de template
+
+[source, java]
+----
+String userInput = "Clément'; DROP TABLE users; --";
+String query = STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
+
+//résultat sans le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'John'; DROP TABLE users; --'
+
+//résultat avec le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'John''; DROP TABLE users; --'
+
+
+String html = STR(HtmlEscaper)."Hello, \{userInput}!";
+----
+
+[.notes]
+--
+* SQLSafeProcessor permet d'échapper  la valeur de userInput pour éviter les injections SQL.
+* Les strings template permettent d'utiliser les proccessor de template comme un SQLProcessor ou un HtmlEscaper : pour valider ou transformer les expressions dynamiques
+* réduit les risques d'injection SQL, XSS (cross-site scripting), ou d'autres vecteurs exploitant une concaténation ou interpolation non sécurisée.
+--
+
+=== Récap
+[.step]
+* *Lisibilité*
+* *Sécurité*
+* *Flexibilité*
+* *Simplicité*
+* *Performance*
+
+[.notes]
+--
+* Lisibilité : Syntaxe intuitive et directe, surtout pour les chaînes complexes ou multilignes.
+* Sécurité : Compatible avec des processeurs (HTML, SQL) : Réduction des erreurs d'injection (SQL, HTML, etc.).
+* Flexibilité : S'intègre bien avec des formats comme JSON, SQL, XML ou HTML.
+* Simplicité : Simple d'utilisation , de compréhension, et de lecture
+* Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
+--
+
+=== Et pour les dates ?
+
+[source, java]
+----
+LocalDate date = LocalDate.now();
+String message = STR."Today's date is \{date}";
+
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+String message2 = STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
+----
+
+[.notes]
+--
+* Interpolation direct avec la stucture date
+* Facile a personnalisé grâce au processor
+* Bon la mauvaise nouvelle c'est que cette feature pose problème à la communauté et apparement... toute la feature est annulé.  Il travail sur une autre feature.. a suivre!
+--
