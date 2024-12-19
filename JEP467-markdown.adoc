@@ -4,7 +4,8 @@
 [.notes]
 --
 * Markdown : on ne le présente plus, il est facile à écrire et à lire,
-Il est très largement utilisé pour la documentation, les README dans les projets..
+* Il est très largement utilisé pour la documentation, les README dans les projets..
+* utiliser du Markdown dans la (Javadoc).
 --
 
 [%notitle]

@@ -62,11 +62,11 @@ STR."""
 String userInput = "Clément'; DROP TABLE users; --";
 STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
 
-//résultat sans le SQLSafeProcessor
+// résultat sans le SQLSafeProcessor
 SELECT * FROM users WHERE name = 'Clément'; DROP TABLE users; --'
 
-//résultat avec le SQLSafeProcessor
-SELECT * FROM users WHERE name = 'Clément'; DROP TABLE users; --'
+// résultat avec le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'Clément''; DROP TABLE users; --'
 
 
 String html = STR(HtmlEscaper)."Hello, \{userInput}!";
@@ -111,7 +111,7 @@ STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 * Flexibilité : S'intègre bien avec des formats comme JSON, SQL, XML ou HTML.
 * Simplicité : Simple d'utilisation , de compréhension, et de lecture
 * Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
-* une troisième préversion était prévue pour Java 23 sous la JEP 465. Mais la communauté java à beaucoup échangé, elle n'a pas fait l'unaminité.
+* une troisième préversion était prévue pour Java 23. Mais la communauté java à beaucoup échangé, elle n'a pas fait l'unaminité.
 * donc la fonctionnalité a été retirée de Java 23
 --
 
