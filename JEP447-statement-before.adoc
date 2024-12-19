@@ -57,5 +57,14 @@ public Voiture(String marque) {
 * Les champs et méthodes hérités du parent ne sont accessibles qu'*après* son initialisation.
 * On peut continuer à mettre notre *super()* avant des instructions
 
+[.notes]
+--
+* Cette feature, assouplit cette règle en permettant l’exécution instructions avant l’appel au constructeur parent,
+* à condition de ne pas interagir avec l’instance en cours de création.
+* Si dans le parent il y a des instruction un peu longue : on pas forcément envie de les réaliser si on sait qu'on va throw une exception à l'arriver
+* presente dans java 23 mais peut etre amener a changé
+--
+=== !
+
 
 

@@ -7,9 +7,9 @@
 ----
 public String check(Object o) {
     return switch(o) {
-        case Integer i -> "C'est un entier";
-        case String s -> "Ceci est un string";
-        case Car c -> "C'est un objet Car";
+        case Integer _ -> "C'est un entier";
+        case Float _ -> "Ceci est un nombre à virgule";
+        case Car _ -> "C'est un objet Car";
         default -> "Je ne sais pas ce que c'est";
     };
 }

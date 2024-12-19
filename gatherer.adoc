@@ -102,7 +102,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
                                 "The offspring");
 
  static Gatherer<String, ?, String> filterEndWithS() {
-        return Gatherer.of((state, element, downstream) -> {
+        return Gatherer.of((_, element, downstream) -> {
             if (element.endsWith("s")) {
                 return downstream.push(element);
             }
@@ -111,7 +111,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
 
     }
 var result = texts.stream()
-                .gather(filter())
+                .gather(filterEndWithS())
                 .toList();
  //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
 ----
@@ -132,7 +132,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
                                 "The offspring");
 
    static Gatherer<String, ?, String> takeWhileNameStartWithL() {
-        return Gatherer.of((state, element, downstream) -> {
+        return Gatherer.of((_, element, downstream) -> {
             if (element.startsWith("L")) {
                 return downstream.push(element);
             }
@@ -141,7 +141,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
     }
 
 var result = texts.stream()
-                .gather(takeWhile())
+                .gather(takeWhileNameStartWithL())
                 .toList();
  //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
 ----
