@@ -86,7 +86,7 @@ List<String> result = names.stream()
 * Evidemment avec un état, c'est pas aussi simple !
 * on a plusieurs méthodes qui nous permettent de gérer nos états
 * Gatherer.of() utilises *4 fonctions*
-* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état)
+* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état) (supplier) -> une fonction sans arguments qui renvoie une valeur.
 * *integrator* reçoit cet état, donc il peut changer l' état , c'est là ou tout se passe
 * *combiner* si je fais des threadsq en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
 differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
@@ -111,7 +111,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
         });
 
     }
-var result = texts.stream()
+var result = artistes.stream()
                 .gather(filterEndWithS())
                 .toList();
  //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
@@ -141,7 +141,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
         });
     }
 
-var result = texts.stream()
+var result = artistes.stream()
                 .gather(takeWhileNameStartWithL())
                 .toList();
  //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
