@@ -1,5 +1,5 @@
 [%notitle]
-== Intro
+=== toto
 
 image::images/Java-Emblem.jpg[background, width=200]
 

@@ -16,5 +16,6 @@ include::Programme23.adoc[]
 include::JEP455-primitive-type.adoc[]
 include::JEP467-markdown.adoc[]
 include::gatherer.adoc[]
+include::conclusion.adoc[]
 
 

@@ -1,25 +1,14 @@
-[%notitle]
-== Debut
 
-image::images/ROBOT.png[background, size=content]
+== Les nouveautés Java 22 et Java 23
 
-[%notitle]
-=== Intro
-
-image::images/Java-Emblem.jpg[width=500]
+image::images/logo-java-512.png[width=500]
 [role="font-size: 200px"]
-_Les nouveautés Java 22 et Java 23_
+
 
 [.notes]
 --
+* J'ai sélectionné pour une partie des fonctionnalités qui me parraissait interessante
 --
-
-[%notitle]
-=== Contenu des parties
-
-[.step]
-* Contenu - _Parcourir les features et les previews de Java 22 et Java 23_
-* Motivation - _Découvrir les nouveautés, les appliquer sur nos projets_
 
 
 [%notitle.columns.is-vcentered.transparency]

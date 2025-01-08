@@ -74,28 +74,27 @@ List<String> result = names.stream()
 === Le gatherer avec etat
 --
 [.step]
-* Gatherer.of() utilises *4 fonctions*
+* Gatherer.of() utilises *4 méthodes*
 * *initializer*  permet de creer un état en fournissant un supplier
-* *integrator* reçoit cet état
+* *integrator* reçoit un état, un élément et un *downstream*
 * *combiner* pour les calculs en parallèle
 * *finisher* traite les états restants
 --
 
 [.notes]
 --
-* Evidemment avec un état, c'est pas aussi simple !
-* on a plusieurs méthodes qui nous permettent de gérer nos états
-* Gatherer.of() utilises *4 fonctions*
+* Gatherer.of() utilise *4 méthodes*
 * *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état) (supplier) -> une fonction sans arguments qui renvoie une valeur.
-* *integrator* reçoit cet état, donc il peut changer l' état , c'est là ou tout se passe
-* *combiner* si je fais des threadsq en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
+* *integrator* reçoit un état, un élément, et un downstream, donc il peut changer l' état , c'est là ou tout se passe
+* *downstream*  il permet d'interoger nos étapes suivantes pour savoir si ils veulent oui non des éléments suivant
+* *combiner* si je fais des threads en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
 differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
 * *finisher* traite des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
 --
 
 === Le gatherer sans etat
 
-[source,java]
+[source,java,highlight="6|7|8|9||11|15|16"]
 ----
 List<String> artistes = List.of("Les Casseurs Flotteurs",
                                 "Les Cowboys Fringuants",
@@ -119,13 +118,16 @@ var result = artistes.stream()
 
 [.notes]
 --
+* Pour commencer on type notre Gatherer <String, ?, String> type d'entée > type de notre état > et Type de notre élement de sortie
 * L'objet downstream a une methode push: pousse un élement pour le stage suivant
-* push qui renvoie un boolean : pour nous dire si le stage d'apres accepte des élements ou pas vrai si il veut des élements ou false
+* om a aussi un methode qui s'appel greedy qui veut dire = pas d'interruption
+* push qui renvoie un boolean : donc il interoge les opérations suivante de notre stream, pour nous dire si ils acceptent des élements
+* pour conclure, on renvoie vrai, car on fait un filter, on veut continuer a parcourir l'integralité de notre liste
 --
 
 [%notitle]
 === Gatherer
-[source,java]
+[source,java,highlight="7|8|9|11|18"]
 ----
 List<String> artistes = List.of("Les Casseurs Flotteurs",
                                 "Les Cowboys Fringuants",
@@ -154,7 +156,7 @@ var result = artistes.stream()
 
 [%notitle]
 === Le gatherer avec etat
-[source,java]
+[source,java,highlight="5|8|9|14|16"]
 ----
     static Gatherer<String, ?, String> limitFirstThreeElement() {
 
@@ -180,6 +182,8 @@ var result = artistes.stream()
 
 [.notes]
 --
+* dès qu'on a un état on doit écrire le combiner et le finisher
+* notre combiner sera appelé uniquement quand le stream sera parallèle (là ce n'est pas le cas)
 * C'était intéressant tout ça hein ?
 * Mais personnellement je n'ai pas encore trouver de cas précis dans le quel on utilisera des gatherers
 --

@@ -5,13 +5,21 @@
 
 [source, java]
 ----
-public String check(Object o) {
-    return switch(o) {
-        case Integer i -> "C'est un entier";
-        case int s -> "Ceci est un type primitif";
-        case Car c -> "C'est un objet Car";
-        default -> "Je ne sais pas ce que c'est";
-    };
+    public static String checkType(Object o) {
+        return switch (o) {
+            case Integer _ -> "C'est un entier";
+            case Float _ -> "Ceci est un nombre à virgule";
+            case Voiture _ -> "Ceci est une voiture";
+            default -> "?";
+        };
+    }
+
+    public static void main(String[] args) {
+        Random rand = new Random();
+        float randomFloat = rand.nextFloat();
+        System.out.println(checkType(randomFloat) + ' ' + randomFloat);
+        //Ceci est un nombre à virgule 0.11921394
+    }
 }
 ----
 
@@ -20,18 +28,6 @@ public String check(Object o) {
 * Ce code permet d'effectuer un pattern matching sur des types de référence comme Integer, String, et des classes définies par l'utilisateur.
 donc on regarde de quel type est notre objet, dès que ça match on renvoie le string correspondant
 --
-
-[source, java]
-----
-public String check(Object o) {
-    return switch(o) {
-        case int i -> "C'est un entier";
-        case float  s -> "C'est un nombre à virgule";
-        case Car c -> "C'est un objet Car";
-        default -> "Je ne sais pas ce que c'est";
-    };
-}
-----
 
 === Instance of
 
@@ -96,7 +92,6 @@ Java effectuera automatiquement la correspondance des champs d'un record sans av
 === Récap
 
 [.step]
-* Des fonctionnalités *puissantes*
 * La prise en charge des *types primitifs*,
 * La *simplification* du code
 * Réduction des *risques* d'erreurs de type grâce à un casting implicite.

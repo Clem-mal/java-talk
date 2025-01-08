@@ -11,29 +11,9 @@
 * Introduit en preview avec le JDK 21, elle est finalisée dans le JDK 22.
 --
 
-=== Avant la JEP 456
+=== Avant la feature
 
-[source, java]
-----
-        Map<String, Integer> scores = Map.of(
-            "Alice", 85,
-            "Bob", 75,
-            "Charlie", 90,
-            "David", 60
-        );
-
-        Map<String, Integer> filteredScores = scores.entrySet()
-            .stream()
-            .filter(entry -> entry.getValue() >= 80)
-            .collect(Collectors.toMap(
-                entry -> entry.getKey(),
-                entry -> entry.getValue()
-            ));
-
-        // Affichage des résultats
-        Nom : Alice, Score : 85
-        Nom : Charlie, Score : 90
-----
+image::images/jep456/stringTemplateimagetermine.png[alt="Description", width=800]
 
 [.notes]
 --
@@ -42,27 +22,20 @@
 --
 
 
-=== Après la JEP 456
+=== Après la feature
 
 [source, java]
 ----
-          Map<String, Integer> scores = Map.of(
-            "Alice", 85,
-            "Bob", 75,
-            "Charlie", 90,
-            "David", 60
-        );
-        Map<String, Integer> filteredScores = scores.entrySet()
-            .stream()
-            .filter(_ -> _.getValue() <= 80)
-            .collect(Collectors.toMap(
-                _ -> _.getKey(),
-                _ -> _.getValue()
-            ));
-        // Affichage des résultats
-        Nom : David, Score : 60
-        Nom : Bob, Score : 75
-    }
+public String check(Object o) {
+    return switch(o) {
+        case Integer _ -> "C'est un entier";
+        case String  _ -> "C'est un string";
+        case Voiture _ -> "C'est un objet Car";
+        default -> "Je ne sais pas ce que c'est";
+    };
+}
+
+BiFunction<Integer, String, Integer> processAOnly = (a, _) -> a * 2;
 ----
 
 === Récap
@@ -70,7 +43,6 @@
 [.step]
 * *Lisibilité améliorée*
 * *Réduction des avertissements*
-* *Meilleure gestion*
 * *Réduction de la charge cognitive*
 
 [.notes]
@@ -78,6 +50,5 @@
 * Java a enfin pris une fonctionnalité interessante de nos amis fronteux -> oui, ca existe depuis longtemps chez eux !
 * *Lisibilité améliorée* en supprimant les variables inutiles.
 * *Réduction des avertissements* de variables non utilisées lors de la compilation.
-* *Meilleure gestion* du pattern matching, lorsque certains éléments du modèle ne sont pas pertinents.
 * *Réduction de la charge cognitive* pour les développeurs en éliminant les variables sans intérêt.
 --

@@ -15,9 +15,10 @@
 
 === Java 21 et avant
 
-[source, java]
+[source,java,highlight="4|7|10|13"]]
 ----
 String name ="Clément";
+String onepoint ="onepoint";
 // Concaténation classique
 String message1 = name + ", vous souhaite bienvenue chez" + onepoint ;
 
@@ -57,7 +58,7 @@ STR."""
 
 === Processor de template
 
-[source, java]
+[source,java,highlight="1|2|5|8|11"]
 ----
 String userInput = "Clément'; DROP TABLE users; --";
 STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
@@ -100,7 +101,6 @@ STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 [.step]
 * *Lisibilité*
 * *Sécurité*
-* *Flexibilité*
 * *Simplicité*
 * *Performance*
 
@@ -108,7 +108,6 @@ STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 --
 * Lisibilité : Syntaxe intuitive et directe, surtout pour les chaînes complexes ou multilignes.
 * Sécurité : Compatible avec des processeurs (HTML, SQL) : Réduction des erreurs d'injection (SQL, HTML, etc.).
-* Flexibilité : S'intègre bien avec des formats comme JSON, SQL, XML ou HTML.
 * Simplicité : Simple d'utilisation , de compréhension, et de lecture
 * Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
 * une troisième préversion était prévue pour Java 23. Mais la communauté java à beaucoup échangé, elle n'a pas fait l'unaminité.

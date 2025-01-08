@@ -2,10 +2,12 @@
 [.step]
 * JEP 447 - Statements before super (Preview)
 * JEP 456 - Unnamed Variables & Patterns
-* JEP 459 - String Templates
+* JEP 459 - String Templates (Preview)
+
 
 [.notes]
 --
+* JEP signifie "JDK Enhancement Proposal" : Il s'agit d'un processus de proposition de nouvelles fonctionnalités
 * Dans le talk je vais être amener à parler de preview,  donc pour rappel la preview est :
 * donc c'est une fonctionalité qui est incluse dans une version spécifique
 * mais qui est encore en phase d'évaluation

@@ -13,7 +13,7 @@
 
 === Avant la feature
 
-image::images/jep456/stringTemplateimagetermine.png[alt="Description", width=800]
+image::images/jep456/stringunamed.png[alt="Description", width=800]
 
 [.notes]
 --
@@ -29,7 +29,7 @@ image::images/jep456/stringTemplateimagetermine.png[alt="Description", width=800
 public String check(Object o) {
     return switch(o) {
         case Integer _ -> "C'est un entier";
-        case float  _ -> "C'est un nombre à virgule";
+        case String  _ -> "C'est un string";
         case Voiture _ -> "C'est un objet Car";
         default -> "Je ne sais pas ce que c'est";
     };

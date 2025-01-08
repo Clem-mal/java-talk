@@ -2,6 +2,7 @@
 
 [.notes]
 --
+* nouvelle APi qui va être complémentaire des streams
 * ils sont arrivé en preview avec java 22, mais avant de vous parler des Gatherer, on va refaire
 le point sur les Streams!
 --
@@ -13,17 +14,17 @@ le point sur les Streams!
 List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "Frank");
 
         List<String> result = names.stream()
-                                   .filter(name -> name.startsWith("A") || name.startsWith("B"))
+                                   .filter(name -> name.startsWith("A"))
                                    .map(String::toUpperCase)
                                    .collect(Collectors.toList());
 
 
-        System.out.println(result); // [ALICE, BOB]
+        System.out.println(result); // [ALICE]
 ----
 
 --
 [.step]
-* *intermediaire*
+* opération *intermediaire*
 * opération *terminal*
 --
 
@@ -31,47 +32,156 @@ List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "F
 --
 * (filter, map...), on peut par exemple enchainer map filter sans jamais s'arrêter
 * on ne peut plus rien faire après (anymatch, findFirst, collect, count...)
-on peut mettre un hook et faire ce qu'on veut a la fin du stream grâce au collector
-* collect qui prend un parametre un collector, il existe plein d'implementation qui sont dans les collectors, mais on peut nous aussi
-reimplémenter nous même ces opérations finales
 --
 
 === Gatherer
 
 --
 [.step]
-* *Gatherer* -> C'est une API, qui permet de définir n'importe quel *opération intermediaire*
+* *Gatherer* -> C'est une API, qui permet de définir n'importe quelle *opération intermediaire*
 --
 
-=== !
-image::images/gatherer/interface_gather.png[alt="Description", width=800]
+[%notitle]
+=== Gatherer
+
+[source,java]
+----
+List<String> result = names.stream()
+                            .gather(Gatherers.fold(...)).toList()
+----
+
 [.notes]
 --
-* Le Gatherer est un type generique
-* methode gather prends en parametre un gatherer qui a 3 types 1 les données en entrées,
-les données en sorties en 2 eme, et au milieu c'est l'état eventuel qu'on peut être amener à vouloir ajouter dans notre gatherer
-* notre opération intermediaire va pouvoir conserver un état, donc prendre des décisions en fonction de ce qu'il c'est passé avant ou après
+* l idée est de rajouté sur Stream : une seule methode : gather
+* et cette methode gather elle prend un gatherer
+* pour ceux qui ont déja vu l'api des collectors, ça marche pareil (avec la methode collect)
+* donc dans la methode Gatherers on a pleins de gatherer qui sont déja prédifinis
+* nottament le .fold, qui permet de faire une agrégation de plusieurs valeur en une donnée unique
+* mais nous on va surtout voir comment on creer notre propre gatherer
 --
-=== !
 
-=== Description Gatherer.of
+=== Un etat
 
-=== !
-image::images/gatherer/interface_gather.png[alt="Description", width=800]
+[.notes]
+--
+* Mes opérations intermédiaire peuvent avoir un état
+* Limit ça a un état : je suis obligé de compter le nombre d élément que j'ai déjà vu
+* distinct ca a un état : je suis obligé de savoir si les éléments sont déjà passé, pour pas les renvoyer deux fois
+* a contrario, le filter ne conserve pas d'état
+--
 
+[%notitle]
+=== Le gatherer avec etat
 --
 [.step]
-* Gatherer.of() utilises *4 fonctions*
-* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état)
-* *integrator* reçoit cet état, donc il peut changer l' état pour X raisons
-* *combiner* si je fais des calculs en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
-differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
-* *finisher* prends des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
+* Gatherer.of() utilises *4 méthodes*
+* *initializer*  permet de creer un état en fournissant un supplier
+* *integrator* reçoit cet état
+* *combiner* pour les calculs en parallèle
+* *finisher* traite les états restants
 --
 
 [.notes]
 --
-* Pour créer un gatherer on utilise gatheter.of (comme collectors)
-* Creation intermediaire : Envoyer / pousser des valeurs vers l'oparation suivante
-* exemple : Le filter, si le predicate renvoie vrai, alors on pousse les valeurs, si il renvoit faux, on pousse pas
+* Evidemment avec un état, c'est pas aussi simple !
+* on a plusieurs fonctions qui nous permettent de gérer nos états
+* Gatherer.of() utilises *4 fonctions*
+* *initializer*  permet de creer un état en fournissant un supplier (fonction qui permet de créer cet état) (supplier) -> une fonction sans arguments qui renvoie une valeur.
+* *integrator* reçoit cet état, donc il peut changer l' état , c'est là ou tout se passe
+* *combiner* si je fais des threads en parallèle , il faut étre capable de combiner des états pour retourner un état ( si j'ai plusieurs états sur
+differents threads, comment les faire correspondre à un seul état (le combiner ça peut etre la concatenation des listes))
+* *finisher* traite des états restant, et peut nous permettre de faire des opérations pour envoyer ces etats restants
 --
+
+=== Le gatherer sans etat
+
+[source,java]
+----
+List<String> artistes = List.of("Les Casseurs Flotteurs",
+                                "Les Cowboys Fringuants",
+                                "Hans Zimmer",
+                                "The offspring");
+
+ static Gatherer<String, ?, String> filterEndWithS() {
+        return Gatherer.of((_, element, downstream) -> {
+            if (element.endsWith("s")) {
+                return downstream.push(element);
+            }
+            return true;
+        });
+
+    }
+var result = artistes.stream()
+                .gather(filterEndWithS())
+                .toList();
+ //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
+----
+
+[.notes]
+--
+* L'objet downstream a une methode push: pousse un élement pour le stage suivant
+* push qui renvoie un boolean : pour nous dire si le stage d'apres accepte des élements ou pas vrai si il veut des élements ou false
+--
+
+[%notitle]
+=== Gatherer
+[source,java]
+----
+List<String> artistes = List.of("Les Casseurs Flotteurs",
+                                "Les Cowboys Fringuants",
+                                "Hans Zimmer",
+                                "The offspring");
+
+   static Gatherer<String, ?, String> takeWhileNameStartWithL() {
+        return Gatherer.of((_, element, downstream) -> {
+            if (element.startsWith("L")) {
+                return downstream.push(element);
+            }
+            return false;
+        });
+    }
+
+var result = artistes.stream()
+                .gather(takeWhileNameStartWithL())
+                .toList();
+ //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
+----
+
+
+
+=== Le gatherer avec etat
+
+
+[%notitle]
+=== Le gatherer avec etat
+[source,java]
+----
+    static Gatherer<String, ?, String> limitFirstThreeElement() {
+
+        return Gatherer.of(
+                //initializer
+                () -> new Counter(0),
+                (state, element, downstream) -> {
+                    //integrator
+                    if (state.counter++ == 3) {
+                        return false;
+                    }
+                    return downstream.push(element);
+                },
+                //combiner
+                (c1, c2) -> new Counter(c1.counter + c2.counter),
+                //finisher
+                (_, _) -> {
+                }
+        );
+    }
+//resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants, Hans Zimmer]
+----
+
+[.notes]
+--
+* C'était intéressant tout ça hein ?
+* Mais personnellement je n'ai pas encore trouver de cas précis dans le quel on utilisera des gatherers
+--
+
+

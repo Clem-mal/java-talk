@@ -34,12 +34,11 @@
 [source, java]
 ----
 public Voiture(String marque) {
-        if (marque == null || marque.isEmpty()) {
-            throw new IllegalArgumentException("La marque ne peut pas être nulle ou vide");
+        if (marque == null) {
+            throw new IllegalArgumentException("La marque est nulle");
         }
         super();
         this.marque = marque;
-        System.out.println("Une voiture de la marque " + marque + " est créée");
     }
 
 ----
@@ -54,10 +53,18 @@ public Voiture(String marque) {
 
 === Récap
 [.step]
-* *La validation des arguments* ne nécessite plus l'utilisation de méthodes intermédiares
-* *Les variables d'instance* de la classe enfant ne sont pas utilisées *avant* que super() *soit appelé*.
+* Les variables d’instance de la classe enfant ne sont pas utilisées avant que super() soit appelé.
 * Les champs et méthodes hérités du parent ne sont accessibles qu'*après* son initialisation.
 * On peut continuer à mettre notre *super()* avant des instructions
+
+[.notes]
+--
+* Cette feature, assouplit cette règle en permettant l’exécution instructions avant l’appel au constructeur parent,
+* à condition de ne pas interagir avec l’instance en cours de création.
+* Si dans le parent il y a des instruction un peu longue : on pas forcément envie de les réaliser si on sait qu'on va throw une exception à l'arriver
+* presente dans java 23 mais peut etre amener a changé
+--
+=== !
 
 
 

@@ -15,18 +15,21 @@
 
 === Java 21 et avant
 
-[source, java]
+[source,java,highlight="4|7|10|13"]]
 ----
-String name = "Clément";
-int age = 33;
+String name ="Clément";
+String onepoint ="onepoint";
 // Concaténation classique
-String result1 = "Name: " + name + ", Age: " + age;
+String message1 = name + ", vous souhaite bienvenue chez" + onepoint ;
 
 // Avec le String.format
-String result2 = String.format("Name: %s, Age: %d", name, age);
+String message2 = String.format("%s, vous souhaite bienvenue chez %s", name, onepoint);
 
 // Avec le MessageFormat
-String message = MessageFormat.format("Bonjour {0}, vous avez {1} ans.", name, age);
+String message3 = MessageFormat.format("{0}, vous souhaite bienvenue chez {1}.", name, onepoint);
+
+// Avec le .formatted
+String message4 = "%s, vous souhaite bienvenue chez %s".formatted(name, onepoint);
 
 ----
 
@@ -41,12 +44,10 @@ String message = MessageFormat.format("Bonjour {0}, vous avez {1} ans.", name, a
 
 [source, java]
 ----
-String name = "Clément";
-int age = 33;
-String result1 = STR."Name: \{name}, Age: \{age}";
+STR."Name: \{name}, Age: \{age}";
 
 // En text block (multi-ligne)
-String result2 = STR."""
+STR."""
     {
       "name": \{name},
       "age": \{age},
@@ -57,16 +58,16 @@ String result2 = STR."""
 
 === Processor de template
 
-[source, java]
+[source,java,highlight="1|2|5|8|11"]
 ----
 String userInput = "Clément'; DROP TABLE users; --";
-String query = STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
+STR(SQLSafeProcessor)."SELECT * FROM users WHERE name = \{userInput}";
 
-//résultat sans le SQLSafeProcessor
-SELECT * FROM users WHERE name = 'John'; DROP TABLE users; --'
+// résultat sans le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'Clément'; DROP TABLE users; --'
 
-//résultat avec le SQLSafeProcessor
-SELECT * FROM users WHERE name = 'John''; DROP TABLE users; --'
+// résultat avec le SQLSafeProcessor
+SELECT * FROM users WHERE name = 'Clément''; DROP TABLE users; --'
 
 
 String html = STR(HtmlEscaper)."Hello, \{userInput}!";
@@ -79,32 +80,14 @@ String html = STR(HtmlEscaper)."Hello, \{userInput}!";
 * réduit les risques d'injection SQL, XSS (cross-site scripting), ou d'autres vecteurs exploitant une concaténation ou interpolation non sécurisée.
 --
 
-=== Récap
-[.step]
-* *Lisibilité*
-* *Sécurité*
-* *Flexibilité*
-* *Simplicité*
-* *Performance*
-
-[.notes]
---
-* Lisibilité : Syntaxe intuitive et directe, surtout pour les chaînes complexes ou multilignes.
-* Sécurité : Compatible avec des processeurs (HTML, SQL) : Réduction des erreurs d'injection (SQL, HTML, etc.).
-* Flexibilité : S'intègre bien avec des formats comme JSON, SQL, XML ou HTML.
-* Simplicité : Simple d'utilisation , de compréhension, et de lecture
-* Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
---
-
 === Et pour les dates ?
 
 [source, java]
 ----
-LocalDate date = LocalDate.now();
-String message = STR."Today's date is \{date}";
+STR."Today's date is \{LocalDate.now()}";
 
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-String message2 = STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
+DateTimeFormatter.ofPattern("dd/MM/yyyy");
+STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 ----
 
 [.notes]
@@ -113,3 +96,22 @@ String message2 = STR(DateFormatterProcessor.of(formatter))."Today's date is \{d
 * Facile a personnalisé grâce au processor
 * Bon la mauvaise nouvelle c'est que cette feature pose problème à la communauté et apparement... toute la feature est annulé.  Il travail sur une autre feature.. a suivre!
 --
+
+=== Récap
+[.step]
+* *Lisibilité*
+* *Sécurité*
+* *Simplicité*
+* *Performance*
+
+[.notes]
+--
+* Lisibilité : Syntaxe intuitive et directe, surtout pour les chaînes complexes ou multilignes.
+* Sécurité : Compatible avec des processeurs (HTML, SQL) : Réduction des erreurs d'injection (SQL, HTML, etc.).
+* Simplicité : Simple d'utilisation , de compréhension, et de lecture
+* Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
+* une troisième préversion était prévue pour Java 23. Mais la communauté java à beaucoup échangé, elle n'a pas fait l'unaminité.
+* donc la fonctionnalité a été retirée de Java 23
+--
+
+
