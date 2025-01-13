@@ -470,10 +470,10 @@ String message4 = "%s, vous souhaite bienvenue chez %s".formatted(name, onepoint
 <aside class="notes"><div class="ulist"><ul><li><p>1er exemple avec la concaténation classique : La concaténation est peu lisible et peut entraîner des erreurs.</p></li><li><p>2eme exemple le string format : String.format est sensible aux mauvais types passés aux placeholders (%s, %d, etc.).</p></li><li><p>2eme exemple le MessageFormat : Pas très lisible</p></li></ul></div></aside></div></section><section id="_avec_la_feature"><h2>Avec la feature</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">String name ="Clément";
 String age ="33";
 
-STR."Name: \{name}, Age: \{age}";
+String presentation = STR."Name: \{name}, Age: \{age}";
 
 // En text block (multi-ligne)
-STR."""
+String presentationMultiLigne = STR."""
     {
       "name": \{name},
       "age": \{age},
@@ -490,11 +490,12 @@ SELECT * FROM users WHERE name = 'Clément''; DROP TABLE users; --'
 
 
 String html = STR(HtmlEscaper)."Hello, \{userInput}!";</code></pre></div></div>
-<aside class="notes"><div class="ulist"><ul><li><p>SQLSafeProcessor permet d&#8217;échapper  la valeur de userInput pour éviter les injections SQL.</p></li><li><p>Les strings template permettent d&#8217;utiliser les proccessor de template comme un SQLProcessor ou un HtmlEscaper : pour valider ou transformer les expressions dynamiques</p></li><li><p>réduit les risques d&#8217;injection SQL, XSS (cross-site scripting), ou d&#8217;autres vecteurs exploitant une concaténation ou interpolation non sécurisée.</p></li></ul></div></aside></div></section><section id="_et_pour_les_dates"><h2>Et pour les dates ?</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">STR."Today's date is \{LocalDate.now()}";
+<aside class="notes"><div class="ulist"><ul><li><p>SQLSafeProcessor permet d&#8217;échapper la valeur de userInput pour éviter les injections SQL.</p></li><li><p>Les strings template permettent d&#8217;utiliser les proccessor de template comme un SQLProcessor ou un HtmlEscaper : pour valider ou transformer les expressions dynamiques</p></li><li><p>réduit les risques d&#8217;injection SQL, XSS (cross-site scripting), ou d&#8217;autres vecteurs exploitant une concaténation ou interpolation non sécurisée.</p></li></ul></div></aside></div></section><section id="_et_pour_les_dates"><h2>Et pour les dates ?</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">STR."Today's date is \{LocalDate.now()}";
 
 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";</code></pre></div></div>
-<aside class="notes"><div class="ulist"><ul><li><p>Interpolation direct avec la stucture date</p></li><li><p>Facile a personnalisé grâce au processor</p></li><li><p>Bon la mauvaise nouvelle c&#8217;est que cette feature pose problème à la communauté et apparement&#8230;&#8203; toute la feature est annulé.  Il travail sur une autre feature.. a suivre!</p></li></ul></div></aside></div></section><section id="_récap_3" data-background-image="images/recap.png"><h2>Récap</h2><div class="slide-content">
+<aside class="notes"><div class="ulist"><ul><li><p>Interpolation direct avec la stucture date</p></li><li><p>Facile a personnalisé grâce au processor</p></li><li><p>Bon la mauvaise nouvelle c&#8217;est que cette feature pose problème à la communauté et apparement&#8230;&#8203; toute la feature est annulé.
+Il travail sur une autre feature.. a suivre!</p></li></ul></div></aside></div></section><section id="_récap_3" data-background-image="images/recap.png"><h2>Récap</h2><div class="slide-content">
 <div class="ulist step"><ul><li class="fragment"><p><strong>Lisibilité</strong></p></li><li class="fragment"><p><strong>Sécurité</strong></p></li><li class="fragment"><p><strong>Simplicité</strong></p></li><li class="fragment"><p><strong>Performance</strong></p></li></ul></div>
 <aside class="notes"><div class="ulist"><ul><li><p>Lisibilité : Syntaxe intuitive et directe, surtout pour les chaînes complexes ou multilignes.</p></li><li><p>Sécurité : Compatible avec des processeurs (HTML, SQL) : Réduction des erreurs d&#8217;injection (SQL, HTML, etc.).</p></li><li><p>Simplicité : Simple d&#8217;utilisation , de compréhension, et de lecture</p></li><li><p>Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.</p></li><li><p>preview devait être dispo dans java 23, mais malheureusement ils ont décidé de retiré cette feature, pour retravailler le sujet</p></li><li><p>donc la fonctionnalité a été retirée de Java 23</p></li></ul></div></aside></div></section></section>
 <section id="_java_23"><h2>JAVA 23</h2><div class="slide-content"><div class="ulist step"><ul><li class="fragment"><p>JEP 455 - Primitive Types in Patterns, instanceof, and switch</p></li><li class="fragment"><p>JEP 467 - Markdown Documentation Comments</p></li><li class="fragment"><p>JEP 473 - Stream Gatherers</p></li></ul></div></div></section>
