@@ -101,6 +101,7 @@ STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 --
 
 === Récap
+image::images/recap.png[background, width=200]
 [.step]
 * *Lisibilité*
 * *Sécurité*

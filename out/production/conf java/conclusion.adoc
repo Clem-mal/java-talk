@@ -1,0 +1,15 @@
+[%notitle]
+= Les nouveautés Java 22 et Java 23
+
+image:images/logo-java-512.png[width=200]
+
+[.vertical-align-middle]
+icon:github[] Clem-mal
+
+
+[.notes]
+--
+* vous retrouverez sur github :
+** les *slides*
+** tous les *outils évoqués* durant le talk
+--

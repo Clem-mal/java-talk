@@ -6,6 +6,7 @@
 :revealjs_theme: gop
 :revealjs_history: true
 :revealjs_pdfseparatefragments: false
+:customcss: meetup.css
 
 include::introduction.adoc[]
 include::Programme22.adoc[]

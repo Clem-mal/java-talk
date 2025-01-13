@@ -53,6 +53,7 @@ public Voiture(String marque) {
 === !
 
 === Récap
+image::images/recap.png[background, width=200]
 [.step]
 * Les variables d’instance de la classe enfant ne sont pas utilisées avant que super() soit appelé.
 * Les champs et méthodes hérités du parent ne sont accessibles qu'*après* son initialisation.

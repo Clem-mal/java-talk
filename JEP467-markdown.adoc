@@ -77,7 +77,7 @@ public int subtract(int x, int y) {
 ----
 
 === Récap
-
+image::images/recap.png[background, width=200]
 [.step]
 * *Lisibilité améliorée*
 * *Moins de balises techniques*

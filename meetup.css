@@ -1,0 +1,8 @@
+body {
+    .image-left {
+        position: absolute; /* Permet le placement spécifique */
+        top: 10%; /* Centre verticalement */
+        left: 0; /* Aligne à gauche */
+        transform: translateY(-50%); /* Correction pour centrer exactement */
+    }
+}

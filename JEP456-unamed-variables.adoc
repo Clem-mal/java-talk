@@ -39,6 +39,7 @@ BiFunction<Integer, String, Integer> processAOnly = (a, _) -> a * 2;
 ----
 
 === Récap
+image::images/recap.png[background, width=200]
 
 [.step]
 * *Lisibilité améliorée*

@@ -90,6 +90,7 @@ Java effectuera automatiquement la correspondance des champs d'un record sans av
 --
 
 === Récap
+image::images/recap.png[background, width=200]
 
 [.step]
 * La prise en charge des *types primitifs*,
