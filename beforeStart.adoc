@@ -1,0 +1,15 @@
+== Avant de commencer
+
+[.step]
+* Java Enhancement Proposal
+* Preview
+
+[.notes]
+--
+* Dans le talk je vais être amener à parler de JEP :
+* Il s'agit d'un processus de proposition de nouvelles fonctionnalités
+* Et également vous verrez des preview,  donc pour rappel la preview est :
+* c'est une fonctionalité qui est incluse dans une version spécifique
+* mais qui est encore en phase d'évaluation
+* pour y avoir accès : il faut activé le "feature enable preview" dans votre IDE
+--

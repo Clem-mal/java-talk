@@ -9,6 +9,7 @@
 :customcss: meetup.css
 
 include::introduction.adoc[]
+include::beforeStart.adoc[]
 include::Programme22.adoc[]
 include::JEP447-statement-before.adoc[]
 include::JEP456-unamed-variables.adoc[]

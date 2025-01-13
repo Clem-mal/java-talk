@@ -7,7 +7,7 @@ image::images/logo-java-512.png[width=500]
 
 [.notes]
 --
-* J'ai sélectionné pour une partie des fonctionnalités qui me parraissait interessante
+Bonjour à tous, Merci pour votre préscence, Je vais vous parlez des features java 22 sortis en mars 2024 et java 23 sortie en septembre 2024
 --
 
 
@@ -37,10 +37,3 @@ image:images/onepoint.png[width=200]
 
 ****
 
-[.notes]
---
-* Je vais vous parlez des features java 22 sortis en mars 2024 et java 23 sortie en septembre 2024
-* vous retrouverez sur github :
-** les *slides*
-** tous les *outils évoqués* durant le talk
---

@@ -81,7 +81,6 @@ image::images/recap.png[background, width=200]
 [.step]
 * *Lisibilité améliorée*
 * *Moins de balises techniques*
-* *Flexibilité*
 * *Compatible* avec *JavaDoc existantes* et les *éléments HTML*.
 
 [.notes]
@@ -90,7 +89,6 @@ image::images/recap.png[background, width=200]
 * *Lisibilité améliorée* : Markdown est plus simple à lire directement dans le code source.
 * *Moins de balises techniques* : <p>, <ul>, <li>, et les autres balises HTML sont remplacées par une syntaxe beaucoup plus concise.
 * *Flexibilité* : il permet tout de même d'inclure du HTML pour des structures que Markdown ne prend pas en charge nativement.
-* Étendre l'API du Compiler pour gérer le Markdown dans la *documentation*.
 * En résumé, le JEP 467 vise à rendre la documentation Java plus accessible et plus facile à maintenir,
 en offrant une alternative plus conviviale à l'HTML.
 --

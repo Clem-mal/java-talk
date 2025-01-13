@@ -114,7 +114,7 @@ image::images/recap.png[background, width=200]
 * Sécurité : Compatible avec des processeurs (HTML, SQL) : Réduction des erreurs d'injection (SQL, HTML, etc.).
 * Simplicité : Simple d'utilisation , de compréhension, et de lecture
 * Performance : conçus pour être performant surtout par rapport à la concaténation classique ou String.format.
-* une troisième préversion était prévue pour Java 23. Mais la communauté java à beaucoup échangé, elle n'a pas fait l'unaminité.
+* preview devait être dispo dans java 23, mais malheureusement ils ont décidé de retiré cette feature, pour retravailler le sujet
 * donc la fonctionnalité a été retirée de Java 23
 --
 
