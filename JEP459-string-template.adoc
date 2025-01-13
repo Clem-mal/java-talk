@@ -2,14 +2,14 @@
 == String Templates
 
 [.step]
-* Permet de créer des chaînes de caractères dynamiques en intégrant du text statique et des expressions dynamiques
+* Permet de créer des chaînes de caractères dynamiques en intégrant du texte statique et des expressions dynamiques
 * Format lisible et sécurisé
 * Simplification de la génération de chaînes complexes (SQL, JSON, HTML)
-* Utilisation du symbole *STR* combiné à une approche "text block"
+* Utilisation du symbole *STR* combiné à une approche "texte block"
 
 [.notes]
 --
-* text block : Java 13 -> chaîne de carractère multi-ligne ( gérer avec 3 guillemets ("""))
+* texte block : Java 13 -> chaîne de carractère multi-ligne ( gérer avec 3 guillemets ("""))
 * (2eme preview)
 --
 
@@ -44,6 +44,9 @@ String message4 = "%s, vous souhaite bienvenue chez %s".formatted(name, onepoint
 
 [source, java]
 ----
+String name ="Clément";
+String age ="33";
+
 STR."Name: \{name}, Age: \{age}";
 
 // En text block (multi-ligne)
@@ -86,7 +89,7 @@ String html = STR(HtmlEscaper)."Hello, \{userInput}!";
 ----
 STR."Today's date is \{LocalDate.now()}";
 
-DateTimeFormatter.ofPattern("dd/MM/yyyy");
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 ----
 

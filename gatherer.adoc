@@ -25,7 +25,7 @@ List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve", "F
 --
 [.step]
 * opération *intermediaire*
-* opération *terminal*
+* opération *terminale*
 --
 
 [.notes]
@@ -94,7 +94,7 @@ differents threads, comment les faire correspondre à un seul état (le combiner
 
 === Le gatherer sans etat
 
-[source,java,highlight="6|7|8|9||11|15|16"]
+[source,java,highlight="6|7|8|9|11|15|16|18"]
 ----
 List<String> artistes = List.of("Les Casseurs Flotteurs",
                                 "Les Cowboys Fringuants",
@@ -130,8 +130,8 @@ var result = artistes.stream()
 [source,java,highlight="7|8|9|11|18"]
 ----
 List<String> artistes = List.of("Les Casseurs Flotteurs",
-                                "Les Cowboys Fringuants",
                                 "Hans Zimmer",
+                                "Les Cowboys Fringuants",
                                 "The offspring");
 
    static Gatherer<String, ?, String> takeWhileNameStartWithL() {
@@ -146,7 +146,7 @@ List<String> artistes = List.of("Les Casseurs Flotteurs",
 var result = artistes.stream()
                 .gather(takeWhileNameStartWithL())
                 .toList();
- //resultat [Les Casseurs Flotteurs, Les Cowboys Fringuants]
+ //resultat [Les Casseurs Flotteurs]
 ----
 
 
@@ -156,7 +156,7 @@ var result = artistes.stream()
 
 [%notitle]
 === Le gatherer avec etat
-[source,java,highlight="5|8|9|14|16"]
+[source,java,highlight="5|8|9|11|14|16"]
 ----
     static Gatherer<String, ?, String> limitFirstThreeElement() {
 

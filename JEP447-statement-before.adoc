@@ -48,6 +48,7 @@ public Voiture(String marque) {
 * Cette feature, assouplit cette règle en permettant l’exécution instructions avant l’appel au constructeur parent,
 * à condition de ne pas interagir avec l’instance en cours de création.
 * Si dans le parent il y a des instruction un peu longue : on pas forcément envie de les réaliser si on sait qu'on va throw une exception à l'arriver
+* evite des traitmenets inutile et couteux du parents
 --
 === !
 

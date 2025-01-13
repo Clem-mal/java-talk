@@ -8,7 +8,7 @@
     public static String checkType(Object o) {
         return switch (o) {
             case Integer _ -> "C'est un entier";
-            case Float _ -> "Ceci est un nombre à virgule";
+            case float _ -> "Ceci est un nombre à virgule";
             case Voiture _ -> "Ceci est une voiture";
             default -> "?";
         };
