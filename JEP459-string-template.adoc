@@ -97,8 +97,6 @@ STR(DateFormatterProcessor.of(formatter))."Today's date is \{date}";
 --
 * Interpolation direct avec la stucture date
 * Facile a personnalisé grâce au processor
-* Bon la mauvaise nouvelle c'est que cette feature pose problème à la communauté et apparement... toute la feature est annulé.
-Il travail sur une autre feature.. a suivre!
 --
 
 === Récap
